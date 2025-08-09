@@ -1,0 +1,23 @@
+<mat-toolbar class="bg-[#D7E3FF]">
+    <!-- <button matIconButton class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button> -->
+  <div class="flex gap-3">
+        <span><a routerLink="/employee" class="font-medium">Employee</a></span>
+        <button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+            <a routerLink="/employee" class="text-sm md:text-xl font-normal">View Employee</a>
+        </button>
+        <button class="example-icon" aria-label="Example icon-button with share icon">
+            <a routerLink="/add-employee" class="text-sm md:text-xl font-normal">Add Employee</a>
+        </button>
+    </div>
+    <span class="example-spacer"></span>
+    <div>
+        <button mat-icon-button class="bg-white">
+            <mat-icon class="text-gray-500">login</mat-icon>
+        </button>
+        <!-- <button mat-icon-button class="bg-white">
+            <mat-icon class="text-red-500">logout</mat-icon>
+        </button> -->
+    </div>
+</mat-toolbar>

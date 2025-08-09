@@ -1,0 +1,54 @@
+<section>
+    <h1 class="text-center text-3xl font-medium">Add Employee</h1>
+    <form [formGroup]="employeeForm" (ngSubmit)="submitFrom()"
+        class="py-3 md:px-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 sm:gap-4">
+        <div>
+            <mat-form-field class="example-full-width">
+                <mat-label>Employee Full Name</mat-label>
+                <input matInput formControlName="employeeName" placeholder="Ex. Shyam">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width">
+                <mat-label>Employee Title</mat-label>
+                <input matInput formControlName="employeeTitle" placeholder="Ex. Software Developer">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width">
+                <mat-label>Location</mat-label>
+                <input matInput formControlName="employeeLocation" placeholder="Ex. Delhi">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="example-full-width">
+                <mat-label>Employee Type</mat-label>
+                <mat-select formControlName="employeeType">
+                    @for (employee of employees; track employee) {
+                    <mat-option [value]="employee.value">{{employee.viewValue}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field  class="example-full-width">
+                <mat-label>Choose Start Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="startDate">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field  class="example-full-width">
+                <mat-label>Choose End Date</mat-label>
+                <input matInput [matDatepicker]="picker1" formControlName="endDate">
+                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="grid items-center">
+            <button mat-button class="text-white w-full" type="submit"
+                [ngClass]="{'bg-gray-500': employeeForm.invalid,'bg-green-500': employeeForm.valid}">Submit</button>
+        </div>
+    </form>
+</section>
