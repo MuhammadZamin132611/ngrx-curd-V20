@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MaterialModule } from '../../../Material.module';
 import { RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-header',
@@ -12,21 +13,17 @@ import { ToastrService } from 'ngx-toastr';
 export class Header implements OnInit {
   loggedUser: string | null = null;
 
-  constructor(private toastr: ToastrService) { }
+  constructor(private toastr: ToastrService, private authService: Auth) { }
 
   ngOnInit(): void {
-    if (typeof window !== 'undefined') {
-      this.loggedUser = localStorage.getItem('login');
-    }
+    this.authService.loggedUser$.subscribe(user => {
+      this.loggedUser = user;
+    });
   }
 
-
   logOut() {
-    if (typeof window !== 'undefined') {
-      this.toastr.success('', `Successfully LogOut`);
-      localStorage.removeItem('login');
-      this.loggedUser = null;
-    }
+    this.toastr.success('','Logout');
+    this.authService.logOut();
   }
 
 }

@@ -1,0 +1,15 @@
+{
+  "login": [
+    {
+      "id": "TalN2VLu5TBhICuK",
+      "email": "zamin@gmail.com",
+      "password": "zmain@123"
+    },
+    {
+      "id": "PBtLtG8zBvSY5dgi",
+      "email": "admin@gmail.com",
+      "password": "admin@123"
+    }
+  ],
+  "employee": []
+}

@@ -13,13 +13,12 @@
     </div>
     <span class="example-spacer"></span>
     <div>
-        @if(loggedUser){
-        <button mat-icon-button routerLink="/" (click)="logOut()" class="bg-white">
+        @if (loggedUser) {
+        <button mat-icon-button routerLink="/login" (click)="logOut()" class="bg-white">
             <mat-icon class="text-red-500">logout</mat-icon>
         </button>
-        }
-        @else {
-        <button mat-icon-button class="bg-white">
+        } @else {
+        <button mat-icon-button routerLink="/login" class="bg-white">
             <mat-icon class="text-gray-500">login</mat-icon>
         </button>
         }

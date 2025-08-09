@@ -3,6 +3,9 @@ import { MaterialModule } from '../../../Material.module';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Auth } from '../../services/auth';
+import { LoginService } from '../../services/login-service';
+import { LoginModel } from '../modal/login.modal';
 
 @Component({
   selector: 'app-login',
@@ -13,19 +16,41 @@ import { Router } from '@angular/router';
 export class Login {
   protected readonly loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private toastr: ToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private toastr: ToastrService, private authService: Auth, private loginService: LoginService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     })
   }
 
+  _generateId(length: number = 16): string {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let id = '';
+    for (let i = 0; i < length; i++) {
+      id += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return id;
+  }
+
   loginSubmit() {
     if (this.loginForm.valid) {
-      localStorage.setItem('login',JSON.stringify(this.loginForm.value));
-      this.toastr.success('', 'Successfully Login')
-      this.router.navigateByUrl('/employee');
-      console.log("Valid", this.loginForm.value);
+      const _obj: LoginModel = {
+        id: this._generateId(),
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password,
+      }
+      this.loginService.createId(_obj).subscribe({
+        next: (data: LoginModel) => {
+          localStorage.setItem('login', JSON.stringify(this.loginForm.value));
+          this.toastr.success('', 'Successfully Login');
+          this.authService.logIn('login');
+          this.router.navigateByUrl('/employee');
+          console.log("Valid", this.loginForm.value);
+        },
+        error: (error: any) => {
+          this.toastr.success(error.error.message, 'Something Error');
+        }
+      })
     }
     else {
       this.loginForm.markAllAsTouched();

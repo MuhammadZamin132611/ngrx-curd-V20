@@ -12,5 +12,5 @@ export const routes: Routes = [
     { path: 'employee', component: ViewEmployee, title: 'All Employee', canActivate: [authGuard] },
     { path: 'add-employee', component: AddEmployee, title: 'Add Employee', canActivate: [authGuard] },
     { path: 'add-employee', component: EditEmployee, title: 'Edit Employee', canActivate: [authGuard] },
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '', redirectTo: '/employee', pathMatch: 'full', },
 ];
