@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MaterialModule } from '../../../Material.module';
 import { RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
@@ -9,5 +10,11 @@ import { RouterLink } from '@angular/router';
   styleUrl: './header.scss'
 })
 export class Header {
+
+  constructor(private toastr: ToastrService) {}
+
+  showSuccess() {
+    this.toastr.error('Create an account', `Don't have an account`);
+  }
 
 }
