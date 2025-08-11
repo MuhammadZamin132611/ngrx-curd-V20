@@ -5,12 +5,17 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class Auth {
-  private loggedUserSubject = new BehaviorSubject<string | null>(localStorage.getItem('login'));
+  private loggedUserSubject = new BehaviorSubject<any | null>(this.getStoredUser());
   loggedUser$ = this.loggedUserSubject.asObservable();
 
-  logIn(userData: string) {
-    localStorage.setItem('login', userData);
-    this.loggedUserSubject.next(userData); // notify subscribers
+  private getStoredUser(): any | null {
+    const userData = localStorage.getItem('login');
+    return userData ? JSON.parse(userData) : null;
+  }
+
+  logIn(userData: any) {
+    localStorage.setItem('login', JSON.stringify(userData)); // ✅ store full object
+    this.loggedUserSubject.next(userData);
   }
 
   logOut() {

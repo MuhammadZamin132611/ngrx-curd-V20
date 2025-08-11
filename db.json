@@ -19,6 +19,36 @@
       "id": "1OqoLDOoQ7Z6f4xf",
       "email": "zamin1@gmail.com",
       "password": "zmain@123"
+    },
+    {
+      "id": "nHqxDQMnVtpTFzJv",
+      "email": "role@gmail.com",
+      "password": "role@123",
+      "isAdmin": false
+    },
+    {
+      "id": "qX8fioaZJtucjlZp",
+      "email": "role1@gmail.com",
+      "password": "role@123",
+      "isAdmin": false
+    },
+    {
+      "id": "ssegapucVTKPFeVf",
+      "email": "role3@gmail.com",
+      "password": "role@123",
+      "isAdmin": true
+    },
+    {
+      "id": "Mz4dMpSXRJkdNoro",
+      "email": "check@gmail.com",
+      "password": "check@123",
+      "isAdmin": false
+    },
+    {
+      "id": "p78Jrui3AJnG0sL7",
+      "email": "hjbbhhb@hbbh",
+      "password": "hbhhbhhb",
+      "isAdmin": false
     }
   ],
   "employee": []

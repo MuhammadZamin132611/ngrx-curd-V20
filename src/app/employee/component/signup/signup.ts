@@ -21,6 +21,7 @@ export class Signup {
     this.signupForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      isAdmin: [false]
     })
   }
 
@@ -35,9 +36,9 @@ export class Signup {
 
   signupSubmit() {
     if (this.signupForm.valid) {
-
       const email = this.signupForm.value.email!;
-      this.loginService.checkEmailExists(email).subscribe({
+      const passsword = this.signupForm.value.passsword!;
+      this.loginService.checkEmailExists(email, passsword).subscribe({
         next: (exists: boolean) => {
           if (exists) {
             this.toastr.error('User already registered', 'Error');
@@ -47,13 +48,14 @@ export class Signup {
               id: this._generateId(),
               email: this.signupForm.value.email,
               password: this.signupForm.value.password,
+              isAdmin: this.signupForm.value.isAdmin,
             }
 
             this.loginService.createId(_obj).subscribe({
               next: () => {
-                localStorage.setItem('login', JSON.stringify(this.signupForm.value));
+                // localStorage.setItem('login', JSON.stringify(this.signupForm.value));
                 this.toastr.success('', 'Successfully Login');
-                this.authService.logIn('login');
+                this.authService.logIn(_obj);
                 this.router.navigateByUrl('/employee');
               },
               error: (error: any) => {

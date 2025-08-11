@@ -1,5 +1,6 @@
 export interface LoginModel {
-    id: string;
+    id?: string;
     email: string;
     password: string;
+    isAdmin?:boolean;
 }

@@ -36,16 +36,20 @@ export class Login {
     if (this.loginForm.valid) {
       const email = this.loginForm.value.email!;
       const password = this.loginForm.value.password!;
+      const _obj: LoginModel = {
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password,
+      }
       this.loginService.checkUser(email, password).subscribe({
         next: (users: LoginModel[]) => {
           if (users.length > 0) {
-            localStorage.setItem('login', JSON.stringify(this.loginForm.value));
+            const loggedInUser = users[0]; 
+            this.authService.logIn(loggedInUser);
             this.toastr.success('Welcome Back', 'Successfully Login');
-            this.authService.logIn('login');
             this.router.navigateByUrl('/employee');
             console.log("Valid", this.loginForm.value);
           }
-          else{
+          else {
             this.toastr.error('Invalid Email or Password', 'Login Failed');
           }
         },
