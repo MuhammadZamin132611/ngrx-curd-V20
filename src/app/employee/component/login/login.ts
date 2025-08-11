@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { MaterialModule } from '../../../Material.module';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Auth } from '../../services/auth';
 import { LoginService } from '../../services/login-service';
 import { LoginModel } from '../modal/login.modal';
 
 @Component({
   selector: 'app-login',
-  imports: [MaterialModule, ReactiveFormsModule],
+  imports: [MaterialModule, ReactiveFormsModule, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
@@ -34,21 +34,23 @@ export class Login {
 
   loginSubmit() {
     if (this.loginForm.valid) {
-      const _obj: LoginModel = {
-        id: this._generateId(),
-        email: this.loginForm.value.email,
-        password: this.loginForm.value.password,
-      }
-      this.loginService.createId(_obj).subscribe({
-        next: (data: LoginModel) => {
-          localStorage.setItem('login', JSON.stringify(this.loginForm.value));
-          this.toastr.success('', 'Successfully Login');
-          this.authService.logIn('login');
-          this.router.navigateByUrl('/employee');
-          console.log("Valid", this.loginForm.value);
+      const email = this.loginForm.value.email!;
+      const password = this.loginForm.value.password!;
+      this.loginService.checkUser(email, password).subscribe({
+        next: (users: LoginModel[]) => {
+          if (users.length > 0) {
+            localStorage.setItem('login', JSON.stringify(this.loginForm.value));
+            this.toastr.success('Welcome Back', 'Successfully Login');
+            this.authService.logIn('login');
+            this.router.navigateByUrl('/employee');
+            console.log("Valid", this.loginForm.value);
+          }
+          else{
+            this.toastr.error('Invalid Email or Password', 'Login Failed');
+          }
         },
-        error: (error: any) => {
-          this.toastr.success(error.error.message, 'Something Error');
+        error: () => {
+          this.toastr.error('Error logging in', 'Something Error');
         }
       })
     }
