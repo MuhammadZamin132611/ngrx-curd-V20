@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from "./employee/shared/header/header";
+import { StorageService } from './employee/services/storage-service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,8 @@ import { Header } from "./employee/shared/header/header";
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('Muhammad Zamin');
+  constructor(private storage: StorageService) {
+    this.storage.getItem(); // Automatically clears if older than 30 days
+  }
+
 }

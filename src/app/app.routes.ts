@@ -7,8 +7,8 @@ import { Signup } from './employee/component/signup/signup';
 import { authGuard } from './employee/gurd/auth-guard';
 
 export const routes: Routes = [
-    { path: 'login', component: Login, title: 'All Employee', },
-    { path: 'signup', component: Signup, title: 'All Employee' },
+    { path: 'login', component: Login, title: 'All Employee', canActivate: [authGuard] },
+    { path: 'signup', component: Signup, title: 'All Employee', canActivate: [authGuard] },
     { path: 'employee', component: ViewEmployee, title: 'All Employee', canActivate: [authGuard] },
     { path: 'add-employee', component: AddEmployee, title: 'Add Employee', canActivate: [authGuard] },
     { path: 'add-employee', component: EditEmployee, title: 'Edit Employee', canActivate: [authGuard] },
