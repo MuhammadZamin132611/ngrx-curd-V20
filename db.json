@@ -31,6 +31,15 @@
       "employeeType": "full-time",
       "startDate": "2016-11-23T18:30:00.000Z",
       "endDate": "2025-08-23T18:30:00.000Z"
+    },
+    {
+      "id": "9nyCChaafyBddqLJ",
+      "employeeName": "shyam",
+      "employeeTitle": "React",
+      "location": "Pune",
+      "employeeType": "contract",
+      "startDate": "2025-07-31T18:30:00.000Z",
+      "endDate": "2025-08-24T18:30:00.000Z"
     }
   ]
 }

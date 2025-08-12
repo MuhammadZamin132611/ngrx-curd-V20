@@ -15,4 +15,8 @@ export class EmployeeService {
     return this.http.post<EmployeeModel>(this.baseUrl, employee)
   }
 
+  getAllEmployee(): Observable<EmployeeModel[]> {
+    return this.http.get<EmployeeModel[]>(this.baseUrl);
+  }
+
 }
