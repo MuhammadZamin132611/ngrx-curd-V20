@@ -27,8 +27,25 @@ export const authGuard: CanActivateFn = (route, state) => {
 };
 
 
-export const adminGuard: CanActivateFn = (route, state) => {
-  return true;
+// https://www.youtube.com/watch?v=AXaIOWQwysQ
+
+export const roleGuard: CanActivateFn = (route, state) => {
+  const router = inject(Router);
+  const toastr = inject(ToastrService);
+  if(typeof window !== 'undefined'){
+    const loginUser = localStorage.getItem('login');
+    if(loginUser != null){
+      const parsedUser = JSON.parse(loginUser);
+      const role = parsedUser.isAdmin;
+      const allowedRoles = route.data['isAdmin'] as string[];
+      if(role && allowedRoles.includes(role)){
+        return true;
+      }
+    }
+  }
+  toastr.error('You Dont have access','Unauthorized');
+  router.navigateByUrl('/employee');
+  return false;
 };
 
 export const userGuard: CanActivateFn = (route, state) => {

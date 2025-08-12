@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginModel } from '../component/modal/login.modal';
+import { LoginModel } from '../model/login.model';
 import { map, Observable } from 'rxjs';
 
 @Injectable({

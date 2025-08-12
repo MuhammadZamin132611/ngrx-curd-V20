@@ -1,55 +1,36 @@
 {
   "login": [
     {
-      "id": "TalN2VLu5TBhICuK",
-      "email": "zamin@gmail.com",
-      "password": "zmain@123"
-    },
-    {
-      "id": "PBtLtG8zBvSY5dgi",
+      "id": "HtMhEbNi1p0slAXh",
       "email": "admin@gmail.com",
-      "password": "admin@123"
-    },
-    {
-      "id": "lYtB48JlYGqFI3Yo",
-      "email": "kafi@gmail.com",
-      "password": "kafi@123"
-    },
-    {
-      "id": "1OqoLDOoQ7Z6f4xf",
-      "email": "zamin1@gmail.com",
-      "password": "zmain@123"
-    },
-    {
-      "id": "nHqxDQMnVtpTFzJv",
-      "email": "role@gmail.com",
-      "password": "role@123",
-      "isAdmin": false
-    },
-    {
-      "id": "qX8fioaZJtucjlZp",
-      "email": "role1@gmail.com",
-      "password": "role@123",
-      "isAdmin": false
-    },
-    {
-      "id": "ssegapucVTKPFeVf",
-      "email": "role3@gmail.com",
-      "password": "role@123",
+      "password": "admin@123",
       "isAdmin": true
     },
     {
-      "id": "Mz4dMpSXRJkdNoro",
-      "email": "check@gmail.com",
-      "password": "check@123",
-      "isAdmin": false
-    },
-    {
-      "id": "p78Jrui3AJnG0sL7",
-      "email": "hjbbhhb@hbbh",
-      "password": "hbhhbhhb",
+      "id": "26Ldc02NgJVds1Ge",
+      "email": "zamin@gmail.com",
+      "password": "zamin@123",
       "isAdmin": false
     }
   ],
-  "employee": []
+  "employee": [
+    {
+      "id": "ukfWOoqCgJWt2zHc",
+      "employeeName": "zamin",
+      "employeeTitle": "angular",
+      "location": "Delhi",
+      "employeeType": "part-time",
+      "startDate": "2025-08-09T18:30:00.000Z",
+      "endDate": "2025-08-26T18:30:00.000Z"
+    },
+    {
+      "id": "GvQgxNehAjcALj8B",
+      "employeeName": "ram",
+      "employeeTitle": "any",
+      "location": "delhi",
+      "employeeType": "full-time",
+      "startDate": "2016-11-23T18:30:00.000Z",
+      "endDate": "2025-08-23T18:30:00.000Z"
+    }
+  ]
 }

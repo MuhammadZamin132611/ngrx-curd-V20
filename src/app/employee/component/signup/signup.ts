@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ToastrService } from 'ngx-toastr';
 import { Auth } from '../../services/auth';
 import { LoginService } from '../../services/login-service';
-import { LoginModel } from '../modal/login.modal';
+import { LoginModel } from '../../model/login.model';
 
 @Component({
   selector: 'app-signup',
