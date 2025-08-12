@@ -42,19 +42,24 @@ export class EditEmployee {
     this.activeRoute.paramMap.subscribe({
       next: (params) => {
         this.id = params.get('id');
-
         if (this.id) {
           this.empService.getIdByEmployee(this.id).subscribe({
             next: (data: EmployeeModel) => {
               console.log('edit', data);
-              this.editEmployeeForm.patchValue({
-                employeeName: data.employeeName,
-                employeeTitle: data.employeeTitle,
-                employeeLocation: data.location,
-                employeeType: data.employeeType,
-                startDate: data.startDate,
-                endDate: data.endDate
-              });
+              this.editEmployeeForm.get('employeeName')?.setValue(data.employeeName || '');
+              this.editEmployeeForm.get('employeeTitle')?.setValue(data.employeeTitle || '');
+              this.editEmployeeForm.get('employeeLocation')?.setValue(data.location || '');
+              this.editEmployeeForm.get('employeeType')?.setValue(data.employeeType || '');
+              this.editEmployeeForm.get('startDate')?.setValue(data.startDate ? new Date(data.startDate) : null);
+              this.editEmployeeForm.get('endDate')?.setValue(data.endDate ? new Date(data.endDate) : null);
+              // this.editEmployeeForm.setValue({
+              //   employeeName: data.employeeName || '',
+              //   employeeTitle: data.employeeTitle || '',
+              //   employeeLocation: data.location || '',
+              //   employeeType: data.employeeType || '',
+              //   startDate: data.startDate ? new Date(data.startDate) : null,
+              //   endDate: data.endDate ? new Date(data.endDate) : null,
+              // });
             },
             error: () => {
               this.toastr.error('', 'Failed to fetch Employee');

@@ -1,30 +1,18 @@
 <mat-form-field>
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Jhon" #input>
 </mat-form-field>
 
 <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" matSort>
-
-        <!-- ID Column -->
-        <!-- <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
-        </ng-container> -->
-
-        <!-- Progress Column -->
+    <table mat-table [dataSource]="dataSource" matSort>>
         <ng-container matColumnDef="title">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
             <td mat-cell *matCellDef="let row"> {{row.employeeTitle}} </td>
         </ng-container>
-
-        <!-- Name Column -->
         <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
             <td mat-cell *matCellDef="let row"> {{row.employeeName}} </td>
         </ng-container>
-
-        <!-- Fruit Column -->
         <ng-container matColumnDef="location">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
             <td mat-cell *matCellDef="let row"> {{row.location}} </td>
@@ -36,13 +24,13 @@
         </ng-container>
 
         <ng-container matColumnDef="start">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
-            <td mat-cell *matCellDef="let row" class="whitespace-nowrap"> {{row.startDate | date}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> Start Date </th>
+            <td mat-cell *matCellDef="let row" class="whitespace-nowrap"> {{row.startDate | date:'dd MMM yyyy'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="end">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
-            <td mat-cell *matCellDef="let row" class="whitespace-nowrap"> {{row.endDate| date}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="whitespace-nowrap"> End Date </th>
+            <td mat-cell *matCellDef="let row" class="whitespace-nowrap"> {{row.endDate | date:'dd MMM yyyy'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="edit">
@@ -51,7 +39,7 @@
                 <div class="flex gap-1">
                     <button mat-icon-button (click)="editEmployee(row.id)" class="bg-gray-300"><mat-icon
                             class="text-yellow-400">edit</mat-icon></button>
-                    <button mat-icon-button class="bg-gray-300"><mat-icon
+                    <button mat-icon-button (click)="deleteEmployee(row.id)" class="bg-gray-300"><mat-icon
                             class="text-red-500">delete</mat-icon></button>
                 </div>
             </td>

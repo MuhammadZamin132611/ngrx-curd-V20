@@ -50,7 +50,7 @@ export class ViewEmployee implements OnInit, AfterViewInit {
     }
   }
 
-  
+
   getEmployee() {
     this.empService.getAllEmployee().subscribe({
       next: (employee: EmployeeModel[]) => {
@@ -59,15 +59,27 @@ export class ViewEmployee implements OnInit, AfterViewInit {
         this.dataSource.paginator = this.paginator
         console.log(employee);
       },
-      error:()=>{
+      error: () => {
         this.toastr.error('Something Worng', 'Error')
       }
     })
   }
 
-  editEmployee(id:string){
+  editEmployee(id: string) {
     console.log(id);
     this.router.navigate(['edti-employee', id])
+  }
+
+  deleteEmployee(id: string) {
+    this.empService.deleteEmployee(id).subscribe({
+      next: () => {
+        this.toastr.success('Employee Deleted', 'Delete');
+        this.getEmployee();
+      },
+      error: () => {
+        this.toastr.error('Something Worng', 'Error');
+      }
+    })
   }
 }
 
