@@ -64,5 +64,10 @@ export class ViewEmployee implements OnInit, AfterViewInit {
       }
     })
   }
+
+  editEmployee(id:string){
+    console.log(id);
+    this.router.navigate(['edti-employee', id])
+  }
 }
 

@@ -18,5 +18,10 @@ export class EmployeeService {
   getAllEmployee(): Observable<EmployeeModel[]> {
     return this.http.get<EmployeeModel[]>(this.baseUrl);
   }
+  // http://localhost:3000/employee?id=ukfWOoqCgJWt2zHc
+
+  getIdByEmployee(id: string):Observable<EmployeeModel> {
+    return this.http.get<EmployeeModel>(`${this.baseUrl}?id=${id}`)
+  }
 
 }

@@ -11,6 +11,6 @@ export const routes: Routes = [
     { path: 'signup', component: Signup, title: 'All Employee', canActivate: [authGuard] },
     { path: 'employee', component: ViewEmployee, title: 'All Employee', canActivate: [authGuard], },
     { path: 'add-employee', component: AddEmployee, title: 'Add Employee', canActivate: [authGuard, roleGuard], data: { isAdmin: [true] } },
-    { path: 'edti-employee', component: EditEmployee, title: 'Edit Employee', canActivate: [authGuard, roleGuard], data: { isAdmin: [true] } },
+    { path: 'edti-employee/:id', component: EditEmployee, title: 'Edit Employee', canActivate: [authGuard, roleGuard], data: { isAdmin: [true] } },
     { path: '', redirectTo: '/employee', pathMatch: 'full', },
 ];

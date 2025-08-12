@@ -49,8 +49,10 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
             <td mat-cell *matCellDef="let row">
                 <div class="flex gap-1">
-                    <button mat-icon-button class="bg-gray-300"><mat-icon class="text-yellow-400">edit</mat-icon></button>
-                    <button mat-icon-button class="bg-gray-300"><mat-icon class="text-red-500">delete</mat-icon></button>
+                    <button mat-icon-button (click)="editEmployee(row.id)" class="bg-gray-300"><mat-icon
+                            class="text-yellow-400">edit</mat-icon></button>
+                    <button mat-icon-button class="bg-gray-300"><mat-icon
+                            class="text-red-500">delete</mat-icon></button>
                 </div>
             </td>
         </ng-container>
