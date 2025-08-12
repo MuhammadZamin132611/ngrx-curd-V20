@@ -16,7 +16,7 @@ import { DatePipe } from '@angular/common';
   styleUrl: './view-employee.scss'
 })
 export class ViewEmployee implements OnInit, AfterViewInit {
-
+  loggedUser: any;
   displayedColumns: string[] = ['name', 'title', 'location', 'type', 'start', 'end', 'edit'];
   allEmployee!: EmployeeModel[];
   dataSource: MatTableDataSource<EmployeeModel>;
@@ -32,6 +32,7 @@ export class ViewEmployee implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.loggedUser = JSON.parse(localStorage.getItem('login') || '{}');
     this.getEmployee();
   }
 
@@ -71,6 +72,11 @@ export class ViewEmployee implements OnInit, AfterViewInit {
   }
 
   deleteEmployee(id: string) {
+    if (!this.loggedUser?.isAdmin) {
+      this.toastr.error('You are not authorized to delete employees', 'Access Denied');
+      return;
+    }
+
     this.empService.deleteEmployee(id).subscribe({
       next: () => {
         this.toastr.success('Employee Deleted', 'Delete');
