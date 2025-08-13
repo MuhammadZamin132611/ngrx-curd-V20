@@ -8,6 +8,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { employeesReducer } from './store/employees/employees.reducer';
+import { EmployeesEffects } from './store/employees/employees.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,8 +19,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideToastr(),
     provideHttpClient(),
-    provideStore(),
-    provideEffects(),
+    provideStore({employees:employeesReducer}),
+    provideEffects([EmployeesEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
 ]
 };

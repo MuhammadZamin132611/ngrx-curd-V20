@@ -27,8 +27,6 @@ export const authGuard: CanActivateFn = (route, state) => {
 };
 
 
-// https://www.youtube.com/watch?v=AXaIOWQwysQ
-
 export const roleGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   const toastr = inject(ToastrService);

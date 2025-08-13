@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MaterialModule } from '../../../Material.module';
 import { EmployeeService } from '../../services/employee-service';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +8,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EmployeeModel } from '../../model/employeemodel';
 import { DatePipe } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { selectAllEmployees, selectEmployeesLoading } from '../../../store/employees/employees.selectors';
+import * as EmployeesActions from '../../../store/employees/employees.actions'
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-view-employee',
@@ -15,25 +19,39 @@ import { DatePipe } from '@angular/common';
   templateUrl: './view-employee.html',
   styleUrl: './view-employee.scss'
 })
-export class ViewEmployee implements OnInit, AfterViewInit {
+export class ViewEmployee implements OnInit, AfterViewInit, OnDestroy {
   loggedUser: any;
   displayedColumns: string[] = ['name', 'title', 'location', 'type', 'start', 'end', 'edit'];
-  allEmployee!: EmployeeModel[];
+  // allEmployee!: EmployeeModel[];
   dataSource: MatTableDataSource<EmployeeModel>;
+  allEmployee!: EmployeeModel[];
+  employees$!: Observable<EmployeeModel[]>;
+  loading$!: Observable<boolean>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private empService: EmployeeService, private toastr: ToastrService, private router: Router, private cdr: ChangeDetectorRef) {
-    // Create 100 users
+  private subs = new Subscription();
 
-    // Assign the data to the data source for the table to render
+  constructor(private store: Store, private empService: EmployeeService, private toastr: ToastrService, private router: Router, private cdr: ChangeDetectorRef) {
     this.dataSource = new MatTableDataSource(this.allEmployee);
   }
 
   ngOnInit(): void {
     this.loggedUser = JSON.parse(localStorage.getItem('login') || '{}');
-    this.getEmployee();
+
+    // Dispatch action to load employees
+    this.store.dispatch(EmployeesActions.loadEmployees());
+
+    // Subscribe to employees state
+    this.subs.add(
+      this.store.select(selectAllEmployees).subscribe(employees => {
+        this.allEmployee = employees;
+        this.dataSource.data = employees; // ✅ updates table
+      })
+    );
+
+    this.loading$ = this.store.select(selectEmployeesLoading);
   }
 
   ngAfterViewInit() {
@@ -52,18 +70,22 @@ export class ViewEmployee implements OnInit, AfterViewInit {
   }
 
 
+
+
+
   getEmployee() {
-    this.empService.getAllEmployee().subscribe({
-      next: (employee: EmployeeModel[]) => {
-        this.allEmployee = employee;
-        this.dataSource.data = this.allEmployee
-        this.dataSource.paginator = this.paginator
-        console.log(employee);
-      },
-      error: () => {
-        this.toastr.error('Something Worng', 'Error')
-      }
-    })
+    this.store.dispatch(EmployeesActions.loadEmployees());
+    // this.empService.getAllEmployee().subscribe({
+    //   next: (employee: EmployeeModel[]) => {
+    //     this.allEmployee = employee;
+    //     this.dataSource.data = this.allEmployee
+    //     this.dataSource.paginator = this.paginator
+    //     console.log(employee);
+    //   },
+    //   error: () => {
+    //     this.toastr.error('Something Worng', 'Error')
+    //   }
+    // })
   }
 
   editEmployee(id: string) {
@@ -86,6 +108,10 @@ export class ViewEmployee implements OnInit, AfterViewInit {
         this.toastr.error('Something Worng', 'Error');
       }
     })
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 }
 
