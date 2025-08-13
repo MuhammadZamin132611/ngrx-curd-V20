@@ -43,7 +43,7 @@ export const roleGuard: CanActivateFn = (route, state) => {
       }
     }
   }
-  toastr.error('You Dont have access','Unauthorized');
+  toastr.error('You are not an admin','Unauthorized');
   router.navigateByUrl('/employee');
   return false;
 };
