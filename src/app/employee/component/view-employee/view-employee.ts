@@ -71,23 +71,6 @@ export class ViewEmployee implements OnInit, AfterViewInit, OnDestroy {
 
 
 
-
-
-  getEmployee() {
-    this.store.dispatch(EmployeesActions.loadEmployees());
-    // this.empService.getAllEmployee().subscribe({
-    //   next: (employee: EmployeeModel[]) => {
-    //     this.allEmployee = employee;
-    //     this.dataSource.data = this.allEmployee
-    //     this.dataSource.paginator = this.paginator
-    //     console.log(employee);
-    //   },
-    //   error: () => {
-    //     this.toastr.error('Something Worng', 'Error')
-    //   }
-    // })
-  }
-
   editEmployee(id: string) {
     console.log(id);
     this.router.navigate(['edti-employee', id])
@@ -102,7 +85,6 @@ export class ViewEmployee implements OnInit, AfterViewInit, OnDestroy {
     this.empService.deleteEmployee(id).subscribe({
       next: () => {
         this.toastr.success('Employee Deleted', 'Delete');
-        this.getEmployee();
       },
       error: () => {
         this.toastr.error('Something Worng', 'Error');

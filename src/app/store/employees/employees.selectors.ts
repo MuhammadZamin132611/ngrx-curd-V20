@@ -12,3 +12,8 @@ export const selectEmployeesLoading = createSelector(
     selectEmployeesState,
     state => state.loading
 )
+
+export const selectEmployeesLoaded = createSelector(
+    selectEmployeesState,
+    state => state.loaded
+)
