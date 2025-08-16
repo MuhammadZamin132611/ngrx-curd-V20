@@ -18,6 +18,8 @@ export const initialState: EmployeesState = {
 
 export const employeesReducer = createReducer(
     initialState,
+
+    // load Employee
     on(EmployeesActions.loadEmployees, state => ({
         ...state,
         loading: true
@@ -27,11 +29,24 @@ export const employeesReducer = createReducer(
         ...state,
         employees,
         loading: false,
-        loaded:true
+        loaded: true
     })),
+
     on(EmployeesActions.loadEmployeesFailure, (state, { error }) => ({
         ...state,
         loading: false,
+        error
+    })),
+
+    // Add Employee
+    on(EmployeesActions.addEmployeesSuccess, (state, { employees }) => ({
+        ...state,
+        employees: [...state.employees, employees],
+        error: null
+    })),
+
+    on(EmployeesActions.addEmployeesFailure, (state, { error }) => ({
+        ...state,
         error
     }))
 )

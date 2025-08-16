@@ -17,7 +17,7 @@
     {
       "employeeName": "Wasi Haider",
       "employeeTitle": "Marketing",
-      "employeeLocation": "Delhi",
+      "location": "Delhi",
       "employeeType": "full-time",
       "startDate": "2025-08-01T18:30:00.000Z",
       "endDate": "2025-08-30T18:30:00.000Z",
@@ -26,7 +26,7 @@
     {
       "employeeName": "Mohd zamin",
       "employeeTitle": "Angular Developer",
-      "employeeLocation": "South Delhi",
+      "location": "South Delhi",
       "employeeType": "full-time",
       "startDate": "2025-07-31T18:30:00.000Z",
       "endDate": "2025-08-16T18:30:00.000Z",
@@ -35,20 +35,20 @@
     {
       "employeeName": "Mohd Kafi",
       "employeeTitle": "Marketing",
-      "employeeLocation": "Jalalpur",
+      "location": "Jalalpur",
       "employeeType": "full-time",
       "startDate": "2025-08-03T18:30:00.000Z",
       "endDate": "2025-08-23T18:30:00.000Z",
       "id": "p7qlelPpWDHN8ADA"
     },
     {
-      "id": "isKXjXs2ldaXnlLU",
-      "employeeName": "ram",
+      "employeeName": "Ram",
       "employeeTitle": "Digital Marketing",
       "location": "Agra",
       "employeeType": "part-time",
       "startDate": "2025-07-31T18:30:00.000Z",
-      "endDate": "2025-08-25T18:30:00.000Z"
+      "endDate": "2025-08-25T18:30:00.000Z",
+      "id": "isKXjXs2ldaXnlLU"
     },
     {
       "id": "OWbLGHhWoeCQVVYe",
@@ -85,6 +85,24 @@
       "employeeType": "full-time",
       "startDate": "2025-08-11T18:30:00.000Z",
       "endDate": "2026-08-11T18:30:00.000Z"
+    },
+    {
+      "id": "xqmaUeln0F6GtGdv",
+      "employeeName": "zamin Khan",
+      "employeeTitle": "Web Developer",
+      "location": "South Extension New Delhi",
+      "employeeType": "full-time",
+      "startDate": "2021-07-14T18:30:00.000Z",
+      "endDate": "2025-08-14T18:30:00.000Z"
+    },
+    {
+      "id": "NAn8Ty3K1ZV3eA5h",
+      "employeeName": "Nitin",
+      "employeeTitle": "SAP Developer",
+      "location": "Rohini Sector 9",
+      "employeeType": "full-time",
+      "startDate": "2021-07-21T18:30:00.000Z",
+      "endDate": "2025-08-24T18:30:00.000Z"
     }
   ]
 }

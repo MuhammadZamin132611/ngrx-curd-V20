@@ -5,3 +5,8 @@ export const loadEmployees = createAction('[Employees] Load Employees');
 export const loadEmployeesSuccess = createAction('[Employees] Load Employees Success', props<{ employees: EmployeeModel[] }>());
 export const loadEmployeesFailure = createAction('[Employees] Load Employees Failure', props<{ error: any }>());
 
+export const addEmployee = createAction('[Employee] Add Employee', props<{ employees: EmployeeModel }>());
+export const addEmployeesSuccess = createAction('[Employees] Add Employees Success', props<{ employees: EmployeeModel }>());
+export const addEmployeesFailure = createAction('[Employees] Load Employees Failure', props<{ error: any }>());
+
+

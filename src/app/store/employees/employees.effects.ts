@@ -16,7 +16,7 @@ export class EmployeesEffects {
         this.actions$.pipe(
             ofType(EmployeesActions.loadEmployees),
             withLatestFrom(this.store.select(selectEmployeesLoaded)),
-            filter(([_, loaded])=>!loaded),
+            filter(([_, loaded]) => !loaded),
             mergeMap(() =>
                 this.empService.getAllEmployee().pipe(
                     map(employees => EmployeesActions.loadEmployeesSuccess({ employees })),
@@ -25,4 +25,18 @@ export class EmployeesEffects {
             )
         )
     );
+
+    addEmployee$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(EmployeesActions.addEmployee),
+            mergeMap(action =>
+                this.empService.addEmployee(action.employees).pipe(
+                    map(employees => EmployeesActions.addEmployeesSuccess({ employees })),
+                    catchError(error =>
+                        of(EmployeesActions.addEmployeesFailure({ error }))
+                    )
+                )
+            )
+        )
+    )
 }

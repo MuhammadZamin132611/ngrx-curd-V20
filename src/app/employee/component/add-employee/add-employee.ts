@@ -3,9 +3,10 @@ import { MaterialModule } from '../../../Material.module';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { EmployeeModel } from '../../model/employeemodel';
-import { EmployeeService } from '../../services/employee-service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { addEmployee } from '../../../store/employees/employees.actions';
 
 @Component({
   selector: 'app-add-employee',
@@ -21,7 +22,7 @@ export class AddEmployee {
     { value: 'contract', viewValue: 'Contract' },
   ];
 
-  constructor(private fb: FormBuilder, private empService: EmployeeService, private toastr: ToastrService, private router: Router) {
+  constructor(private fb: FormBuilder, private toastr: ToastrService, private router: Router, private store: Store) {
     this.employeeForm = this.fb.group({
       employeeName: ['', Validators.required],
       employeeTitle: ['', Validators.required],
@@ -52,15 +53,9 @@ export class AddEmployee {
         startDate: this.employeeForm.value.startDate,
         endDate: this.employeeForm.value.endDate,
       }
-      this.empService.addEmployee(_employeeObj).subscribe({
-        next: () => {
-          this.toastr.success('Added Successfully', 'Employee Added');
-          this.router.navigateByUrl('/employee');
-        },
-        error: () => {
-          this.toastr.error('Somthing Error', 'Employee not Added');
-        }
-      })
+      this.store.dispatch(addEmployee({ employees: _employeeObj }));
+      this.router.navigateByUrl('/employee');
+      this.toastr.success('Added Successfully', 'Employee Added');
       console.log('Valid', _employeeObj);
     }
     else {
