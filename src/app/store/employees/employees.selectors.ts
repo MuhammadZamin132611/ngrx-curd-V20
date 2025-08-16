@@ -18,6 +18,11 @@ export const selectEmployeesLoaded = createSelector(
     state => state.loaded
 )
 
+export const selectEmployeeError = createSelector(
+    selectEmployeesState,
+    (state) => state.error
+)
+
 export const selectEmployeeById = (id: string) =>
     createSelector(selectEmployeesState, (state) =>
         state.employees.find(emp => emp.id === id)

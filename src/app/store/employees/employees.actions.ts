@@ -13,3 +13,6 @@ export const updateEmployee = createAction('[Employees] Update Employee', props<
 export const updateEmployeeSuccess = createAction('[Employees] Update Employee Success', props<{ employees: EmployeeModel }>());
 export const updateEmployeeFailure = createAction('[Employees] Update Employee Failure', props<{ error: any }>());
 
+export const deleteEmployee = createAction('[Employee] Delete Employee', props<{ id: string }>());
+export const deleteEmployeeSuccess = createAction('[Employee] Delete Employee Success', props<{ id: string }>());
+export const deleteEmployeeFailure = createAction('[Employee] Delete Employee Failure', props<{ error: any }>());

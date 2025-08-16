@@ -68,5 +68,23 @@ export const employeesReducer = createReducer(
         ...state,
         loading: false,
         error
+    })),
+
+    // Delete Employee
+    on(EmployeesActions.deleteEmployee, (state) => ({
+        ...state,
+        loading: true
+    })),
+
+    on(EmployeesActions.deleteEmployeeSuccess, (state, { id }) => ({
+        ...state,
+        loading: false,
+        employees: state.employees.filter(emp => emp.id !== id)
+    })),
+
+    on(EmployeesActions.deleteEmployeeFailure, (state, { error }) => ({
+        ...state,
+        loading: false,
+        error
     }))
 )

@@ -50,5 +50,19 @@ export class EmployeesEffects {
                 )
             )
         )
-    )
+    );
+
+    deleteEmployee$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(EmployeesActions.deleteEmployee),
+            mergeMap(({ id }) =>
+                this.empService.deleteEmployee(id).pipe(
+                    map(() => EmployeesActions.deleteEmployeeSuccess({ id })),
+                    catchError((error) =>
+                        of(EmployeesActions.deleteEmployeeFailure({ error }))
+                    )
+                )
+            )
+        )
+    );
 }

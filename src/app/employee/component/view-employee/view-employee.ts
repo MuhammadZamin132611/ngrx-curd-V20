@@ -35,6 +35,9 @@ export class ViewEmployee implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private store: Store, private empService: EmployeeService, private toastr: ToastrService, private router: Router, private cdr: ChangeDetectorRef) {
     this.dataSource = new MatTableDataSource(this.allEmployee);
+
+    this.employees$ = this.store.select(selectAllEmployees);
+    this.loading$ = this.store.select(selectEmployeesLoading);
   }
 
   ngOnInit(): void {
@@ -76,20 +79,25 @@ export class ViewEmployee implements OnInit, AfterViewInit, OnDestroy {
     this.router.navigate(['edti-employee', id])
   }
 
+
+
   deleteEmployee(id: string) {
     if (!this.loggedUser?.isAdmin) {
       this.toastr.error('You are not authorized to delete employees', 'Access Denied');
       return;
     }
 
-    this.empService.deleteEmployee(id).subscribe({
-      next: () => {
-        this.toastr.success('Employee Deleted', 'Delete');
-      },
-      error: () => {
-        this.toastr.error('Something Worng', 'Error');
-      }
-    })
+    this.store.dispatch(EmployeesActions.deleteEmployee({ id }));
+    this.toastr.success('Employee deleted successfully', 'Deleted');
+
+    // this.empService.deleteEmployee(id).subscribe({
+    //   next: () => {
+    //     this.toastr.success('Employee Deleted', 'Delete');
+    //   },
+    //   error: () => {
+    //     this.toastr.error('Something Worng', 'Error');
+    //   }
+    // })
   }
 
   ngOnDestroy() {
