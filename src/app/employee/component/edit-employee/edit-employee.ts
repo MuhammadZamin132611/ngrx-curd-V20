@@ -7,7 +7,7 @@ import { EmployeeService } from '../../services/employee-service';
 import { EmployeeModel } from '../../model/employeemodel';
 import { ToastrService } from 'ngx-toastr';
 import { Store } from '@ngrx/store';
-import { selectEmployeesLoading } from '../../../store/employees/employees.selectors';
+import { selectEmployeeById, selectEmployeesLoading } from '../../../store/employees/employees.selectors';
 import * as EmployeeActions from '../../../store/employees/employees.actions';
 
 @Component({
@@ -33,14 +33,13 @@ export class EditEmployee implements OnInit {
     private fb: FormBuilder,
     private activeRoute: ActivatedRoute,
     private router: Router,
-    private empService: EmployeeService,
     private toastr: ToastrService,
     private store: Store
   ) {
     this.editEmployeeForm = this.fb.group({
       employeeName: ['', Validators.required],
       employeeTitle: ['', Validators.required],
-      employeeLocation: ['', Validators.required],
+      location: ['', Validators.required],
       employeeType: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
@@ -54,24 +53,22 @@ export class EditEmployee implements OnInit {
       next: (params) => {
         this.id = params.get('id');
         if (this.id) {
-          this.empService.getIdByEmployee(this.id).subscribe({
-            next: (res: EmployeeModel[]) => {
-              if (res.length > 0) {
-                this.employeeData = res[0];
-                this.editEmployeeForm.patchValue({
-                  employeeName: this.employeeData.employeeName,
-                  employeeTitle: this.employeeData.employeeTitle,
-                  employeeLocation: this.employeeData.location,
-                  employeeType: this.employeeData.employeeType,
-                  startDate: this.employeeData.startDate,
-                  endDate: this.employeeData.endDate
-                });
-              }
-            },
-            error: () => {
-              this.toastr.error('', 'Failed to fetch Employee');
+          this.store.select(selectEmployeeById(this.id)).subscribe(emp => {
+            if (!emp) {
+              this.store.dispatch(EmployeeActions.loadEmployees());
+            } else {
+              this.employeeData = emp;
+              this.editEmployeeForm.patchValue({
+                employeeName: emp.employeeName,
+                employeeTitle: emp.employeeTitle,
+                location: emp.location,
+                employeeType: emp.employeeType,
+                startDate: emp.startDate,
+                endDate: emp.endDate
+              });
+
             }
-          });
+          })
         }
       }
     });
@@ -88,13 +85,6 @@ export class EditEmployee implements OnInit {
       }))
       this.router.navigate(['/employee']);
       this.toastr.success('Updated Successfully', 'Employee Updated');
-      // this.empService.updateEmployee(this.id, this.editEmployeeForm.value).subscribe({
-      //   next: () => {
-      //   },
-      //   error: () => {
-      //     this.toastr.error('Something Error', 'Error');
-      //   }
-      // })
       console.log('Valid', this.editEmployeeForm.value);
     }
     else {

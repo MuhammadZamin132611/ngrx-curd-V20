@@ -18,3 +18,7 @@ export const selectEmployeesLoaded = createSelector(
     state => state.loaded
 )
 
+export const selectEmployeeById = (id: string) =>
+    createSelector(selectEmployeesState, (state) =>
+        state.employees.find(emp => emp.id === id)
+    )
