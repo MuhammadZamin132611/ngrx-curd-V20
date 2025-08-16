@@ -38,5 +38,17 @@ export class EmployeesEffects {
                 )
             )
         )
+    );
+
+    updateEmployee$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(EmployeesActions.updateEmployee),
+            mergeMap(({ id, changes }) =>
+                this.empService.updateEmployee(id, changes).pipe(
+                    map((employees) => EmployeesActions.updateEmployeeSuccess({ employees })),
+                    catchError((error) => of(EmployeesActions.updateEmployeeFailure({ error })))
+                )
+            )
+        )
     )
 }

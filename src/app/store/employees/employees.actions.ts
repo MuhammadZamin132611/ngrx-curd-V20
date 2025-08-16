@@ -9,4 +9,7 @@ export const addEmployee = createAction('[Employee] Add Employee', props<{ emplo
 export const addEmployeesSuccess = createAction('[Employees] Add Employees Success', props<{ employees: EmployeeModel }>());
 export const addEmployeesFailure = createAction('[Employees] Load Employees Failure', props<{ error: any }>());
 
+export const updateEmployee = createAction('[Employees] Update Employee', props<{ id: string, changes: EmployeeModel }>());
+export const updateEmployeeSuccess = createAction('[Employees] Update Employee Success', props<{ employees: EmployeeModel }>());
+export const updateEmployeeFailure = createAction('[Employees] Update Employee Failure', props<{ error: any }>());
 

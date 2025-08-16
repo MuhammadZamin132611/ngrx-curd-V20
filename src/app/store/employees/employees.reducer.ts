@@ -48,5 +48,25 @@ export const employeesReducer = createReducer(
     on(EmployeesActions.addEmployeesFailure, (state, { error }) => ({
         ...state,
         error
+    })),
+
+    // Update Employee
+    on(EmployeesActions.updateEmployee, (state) => ({
+        ...state,
+        loading: true
+    })),
+
+    on(EmployeesActions.updateEmployeeSuccess, (state, { employees }) => ({
+        ...state,
+        loading: false,
+        employees: state.employees.map(emp =>
+            emp.id === employees.id ? { ...emp, ...employees } : emp
+        )
+    })),
+
+    on(EmployeesActions.updateEmployeeFailure, (state, { error }) => ({
+        ...state,
+        loading: false,
+        error
     }))
 )

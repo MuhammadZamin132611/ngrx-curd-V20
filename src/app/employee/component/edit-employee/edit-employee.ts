@@ -6,6 +6,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeService } from '../../services/employee-service';
 import { EmployeeModel } from '../../model/employeemodel';
 import { ToastrService } from 'ngx-toastr';
+import { Store } from '@ngrx/store';
+import { selectEmployeesLoading } from '../../../store/employees/employees.selectors';
+import * as EmployeeActions from '../../../store/employees/employees.actions';
 
 @Component({
   selector: 'app-edit-employee',
@@ -24,13 +27,15 @@ export class EditEmployee implements OnInit {
 
   id: string | any;
   employeeData!: EmployeeModel;
+  loading$: any;
 
   constructor(
     private fb: FormBuilder,
     private activeRoute: ActivatedRoute,
     private router: Router,
     private empService: EmployeeService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private store: Store
   ) {
     this.editEmployeeForm = this.fb.group({
       employeeName: ['', Validators.required],
@@ -40,6 +45,8 @@ export class EditEmployee implements OnInit {
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
     });
+
+    this.loading$ = this.store.select(selectEmployeesLoading)
   }
 
   ngOnInit(): void {
@@ -75,15 +82,19 @@ export class EditEmployee implements OnInit {
 
   submitForm() {
     if (this.editEmployeeForm.valid) {
-      this.empService.updateEmployee(this.id, this.editEmployeeForm.value).subscribe({
-        next: () => {
-          this.router.navigate(['/employee']);
-          this.toastr.success('Updated Successfully', 'Employee Updated');
-        },
-        error: () => {
-          this.toastr.error('Something Error', 'Error');
-        }
-      })
+      this.store.dispatch(EmployeeActions.updateEmployee({
+        id: this.id,
+        changes: this.editEmployeeForm.value
+      }))
+      this.router.navigate(['/employee']);
+      this.toastr.success('Updated Successfully', 'Employee Updated');
+      // this.empService.updateEmployee(this.id, this.editEmployeeForm.value).subscribe({
+      //   next: () => {
+      //   },
+      //   error: () => {
+      //     this.toastr.error('Something Error', 'Error');
+      //   }
+      // })
       console.log('Valid', this.editEmployeeForm.value);
     }
     else {
