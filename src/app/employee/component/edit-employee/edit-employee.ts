@@ -44,7 +44,6 @@ export class EditEmployee implements OnInit {
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
     });
-
     this.loading$ = this.store.select(selectEmployeesLoading)
   }
 
@@ -73,9 +72,6 @@ export class EditEmployee implements OnInit {
       }
     });
   }
-
-
-
 
   submitForm() {
     if (this.editEmployeeForm.valid) {

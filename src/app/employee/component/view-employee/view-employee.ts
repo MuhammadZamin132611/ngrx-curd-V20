@@ -22,30 +22,25 @@ import { Observable, Subscription } from 'rxjs';
 export class ViewEmployee implements OnInit, AfterViewInit, OnDestroy {
   loggedUser: any;
   displayedColumns: string[] = ['name', 'title', 'location', 'type', 'start', 'end', 'edit'];
-  // allEmployee!: EmployeeModel[];
   dataSource: MatTableDataSource<EmployeeModel>;
   allEmployee!: EmployeeModel[];
-  employees$!: Observable<EmployeeModel[]>;
-  loading$!: Observable<boolean>;
+  employees$: Observable<EmployeeModel[]>;
+  loading$: Observable<boolean>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
   private subs = new Subscription();
 
   constructor(private store: Store, private empService: EmployeeService, private toastr: ToastrService, private router: Router, private cdr: ChangeDetectorRef) {
     this.dataSource = new MatTableDataSource(this.allEmployee);
-
     this.employees$ = this.store.select(selectAllEmployees);
     this.loading$ = this.store.select(selectEmployeesLoading);
   }
 
   ngOnInit(): void {
     this.loggedUser = JSON.parse(localStorage.getItem('login') || '{}');
-
     // Dispatch action to load employees
     this.store.dispatch(EmployeesActions.loadEmployees());
-
     // Subscribe to employees state
     this.subs.add(
       this.store.select(selectAllEmployees).subscribe(employees => {
@@ -53,7 +48,6 @@ export class ViewEmployee implements OnInit, AfterViewInit, OnDestroy {
         this.dataSource.data = employees; // ✅ updates table
       })
     );
-
     this.loading$ = this.store.select(selectEmployeesLoading);
   }
 
@@ -66,38 +60,23 @@ export class ViewEmployee implements OnInit, AfterViewInit, OnDestroy {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
-
-
 
   editEmployee(id: string) {
     console.log(id);
     this.router.navigate(['edti-employee', id])
   }
 
-
-
   deleteEmployee(id: string) {
     if (!this.loggedUser?.isAdmin) {
       this.toastr.error('You are not authorized to delete employees', 'Access Denied');
       return;
     }
-
     this.store.dispatch(EmployeesActions.deleteEmployee({ id }));
     this.toastr.success('Employee deleted successfully', 'Deleted');
-
-    // this.empService.deleteEmployee(id).subscribe({
-    //   next: () => {
-    //     this.toastr.success('Employee Deleted', 'Delete');
-    //   },
-    //   error: () => {
-    //     this.toastr.error('Something Worng', 'Error');
-    //   }
-    // })
   }
 
   ngOnDestroy() {
