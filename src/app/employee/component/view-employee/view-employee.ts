@@ -31,7 +31,7 @@ export class ViewEmployee implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
   private subs = new Subscription();
 
-  constructor(private store: Store, private empService: EmployeeService, private toastr: ToastrService, private router: Router, private cdr: ChangeDetectorRef) {
+  constructor(private store: Store, private toastr: ToastrService, private router: Router, private cdr: ChangeDetectorRef) {
     this.dataSource = new MatTableDataSource(this.allEmployee);
     this.employees$ = this.store.select(selectAllEmployees);
     this.loading$ = this.store.select(selectEmployeesLoading);
