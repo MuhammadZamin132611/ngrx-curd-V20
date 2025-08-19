@@ -1,16 +1,15 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MaterialModule } from '../../../../Material.module';
-import { EmployeeService } from '../../../services/employee-service';
+import { MaterialModule } from '../../../../../Material.module';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { EmployeeModel } from '../../../model/employeemodel';
+import { EmployeeModel } from '../../../../model/employeemodel';
 import { DatePipe } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { selectAllEmployees, selectEmployeesLoading } from '../../../../store/employees/employees.selectors';
-import * as EmployeesActions from '../../../../store/employees/employees.actions'
+import { selectAllEmployees, selectEmployeesLoading } from '../../../../../store/employees/employees.selectors';
+import * as EmployeesActions from '../../../../../store/employees/employees.actions'
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
