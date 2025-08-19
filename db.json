@@ -85,6 +85,24 @@
       "employeeType": "full-time",
       "startDate": "2021-07-21T18:30:00.000Z",
       "endDate": "2025-08-24T18:30:00.000Z"
+    },
+    {
+      "id": "1Vfvfq8KsQLeym2j",
+      "employeeName": "Raju",
+      "employeeTitle": "Marketing",
+      "location": "Bihar",
+      "employeeType": "contract",
+      "startDate": "2025-08-03T18:30:00.000Z",
+      "endDate": "2025-08-30T18:30:00.000Z"
+    },
+    {
+      "id": "bbzREDqHsGcXxLEW",
+      "employeeName": "Mohit",
+      "employeeTitle": "Data Analytics",
+      "location": "Baderpur Border",
+      "employeeType": "full-time",
+      "startDate": "2025-08-01T18:30:00.000Z",
+      "endDate": "2025-08-28T18:30:00.000Z"
     }
   ]
 }
