@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { MaterialModule } from '../../../Material.module';
+import { MaterialModule } from '../../../../Material.module';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import { EmployeeModel } from '../../model/employeemodel';
+import { EmployeeModel } from '../../../model/employeemodel';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { addEmployee } from '../../../store/employees/employees.actions';
+import { addEmployee } from '../../../../store/employees/employees.actions';
 
 @Component({
   selector: 'app-add-employee',

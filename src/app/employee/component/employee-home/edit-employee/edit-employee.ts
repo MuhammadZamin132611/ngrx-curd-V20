@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MaterialModule } from '../../../Material.module';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EmployeeService } from '../../services/employee-service';
-import { EmployeeModel } from '../../model/employeemodel';
+import { EmployeeModel } from '../../../model/employeemodel';
 import { ToastrService } from 'ngx-toastr';
 import { Store } from '@ngrx/store';
-import { selectEmployeeById, selectEmployeesLoading } from '../../../store/employees/employees.selectors';
-import * as EmployeeActions from '../../../store/employees/employees.actions';
+import { selectEmployeeById, selectEmployeesLoading } from '../../../../store/employees/employees.selectors';
+import * as EmployeeActions from '../../../../store/employees/employees.actions';
+import { MaterialModule } from '../../../../Material.module';
 
 @Component({
   selector: 'app-edit-employee',
