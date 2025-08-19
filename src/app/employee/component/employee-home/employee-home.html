@@ -1,10 +1,14 @@
 <app-header />
 <section class="bg-gray-100">
-    <mat-drawer-container>
-        <mat-drawer></mat-drawer>
-        <mat-drawer-content>
+    <mat-drawer-container autosize class="drawerContainer">
+        <mat-drawer class="sideMenu" #drawer [opened]="isMenuOpen" [disableClose]="isMenuOpen" [mode]="drawerMode"
+            position="start" (mouseenter)="isDesktop && (isExpanded = true)"
+            (mouseleave)="isDesktop && (isExpanded = false)" [ngClass]="{
+            'w-[14.25rem]': isExpanded || !isDesktop,'w-20': !isExpanded && isDesktop}">
+            <app-side-menu [isExpanded]="isExpanded || !isDesktop"/>
+        </mat-drawer>
+        <mat-drawer-content class="drawerContent">
             <router-outlet />
         </mat-drawer-content>
     </mat-drawer-container>
-    Employee
 </section>

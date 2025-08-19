@@ -1,0 +1,21 @@
+@use 'tailwindcss/base';
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+@layer base {
+
+    mat-drawer-container.drawerContainer {
+        @apply flex md:gap-5 w-full
+    }
+
+    mat-drawer.sideMenu {
+        @apply bg-white shadow-md h-full md:h-[calc(100vh-70px)] overflow-auto rounded-none p-5 absolute top-0 left-0;
+        /* REMOVE any fixed width */
+    }
+
+    mat-drawer-content.drawerContent {
+        @apply w-full h-full md:h-[calc(100vh-70px)] overflow-auto;
+    }
+}

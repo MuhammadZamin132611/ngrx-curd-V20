@@ -1,0 +1,7 @@
+@use 'tailwindcss/base';
+
+@layer base {
+    mat-drawer-content {
+        @apply bg-[#FBFCFF] h-[calc(100vh-70px)] overflow-auto;
+    }
+}
