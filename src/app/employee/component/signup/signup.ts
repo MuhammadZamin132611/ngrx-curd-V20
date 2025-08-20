@@ -56,7 +56,7 @@ export class Signup {
                 // localStorage.setItem('login', JSON.stringify(this.signupForm.value));
                 this.toastr.success('', 'Successfully Login');
                 this.authService.logIn(_obj);
-                this.router.navigateByUrl('/employee');
+                this.router.navigateByUrl('/dashboard');
               },
               error: (error: any) => {
                 this.toastr.error(error.error.message, 'Something Error');

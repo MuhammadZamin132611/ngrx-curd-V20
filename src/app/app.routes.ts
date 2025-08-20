@@ -5,7 +5,7 @@ import { authGuard, roleGuard } from './employee/gurd/auth-guard';
 import { EmployeeHome } from './employee/component/employee-home/employee-home';
 
 export const routes: Routes = [
-    { path: 'employee', component: EmployeeHome, title: 'Employee', },
+    
     { path: 'login', component: Login, title: 'Login Employee', canActivate: [authGuard] },
     { path: 'signup', component: Signup, title: 'Signup Employee', canActivate: [authGuard] },
     {

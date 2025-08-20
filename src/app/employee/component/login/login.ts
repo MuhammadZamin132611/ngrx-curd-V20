@@ -46,7 +46,7 @@ export class Login {
             const loggedInUser = users[0]; 
             this.authService.logIn(loggedInUser);
             this.toastr.success('Welcome Back', 'Successfully Login');
-            this.router.navigateByUrl('/employee');
+            this.router.navigateByUrl('/dashboard');
             console.log("Valid", this.loginForm.value);
           }
           else {
