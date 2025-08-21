@@ -9,7 +9,7 @@ import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-employee-home',
-  imports: [MaterialModule, RouterOutlet, Header, SideMenu, NgClass],
+  imports: [MaterialModule, RouterOutlet, Header, SideMenu],
   templateUrl: './employee-home.html',
   styleUrl: './employee-home.scss'
 })

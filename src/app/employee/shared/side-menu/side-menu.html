@@ -1,19 +1,14 @@
-<section class="transition-all duration-300" [ngClass]="isExpanded ? 'w-44' : 'w-20'">
+<section class="transition-all duration-300" >
     <!-- Profile + Divider -->
     <div class="grid gap-5 pb-3">
         <div class="flex items-center justify-between gap-3 cursor-pointer" routerLink="/recuriter/layout/dashboard/profile">
             <div class="flex items-center gap-3">
-                <app-recuriter-profile-image [ngClass]="isExpanded ? 'h-10 w-10' : 'h-10 w-10'" />
-                @if(isExpanded){
-                <div>
-                    <h3 class="text-gray-800 text-base font-semibold whitespace-nowrap">Md Zamin</h3>
-                    <h2 class="text-[#0175A2] text-sm font-medium whitespace-nowrap">Account Admin</h2>
+                
+                <div class="text-center">
+                    <h3 class="text-gray-800 text-base font-semibold whitespace-nowrap text-center">Md Zamin</h3>
+                    <h2 class="text-[#0175A2] text-sm font-medium whitespace-nowrap text-center">Employee {{userRole?'Admin':'User'}}</h2>
                 </div>
-                }
             </div>
-            @if(isExpanded){
-            <mat-icon>arrow_forward_ios</mat-icon>
-            }
         </div>
         <div class="bg-gray-200 w-full h-[0.75px]"></div>
     </div>
@@ -25,13 +20,13 @@
             <a class="flex items-center gap-3 p-2" [routerLink]="menu.link" routerLinkActive="linkactive">
                 <mat-icon
                     [ngClass]="{ 'text-[#0175A2]': isActiveRoute(menu.link), 'text-gray-500': !isActiveRoute(menu.link) }">{{menu.iconName}}</mat-icon>
-                @if(isExpanded){
+                <!-- @if(isExpanded){ -->
                 <span
                     [ngClass]="{ 'text-[#0175A2]': isActiveRoute(menu.link), 'text-gray-500': !isActiveRoute(menu.link) }"
                     class="text-base font-semibold whitespace-nowrap">
                     {{menu.listName}}
                 </span>
-                }
+                <!-- } -->
             </a>
             }
         </div>

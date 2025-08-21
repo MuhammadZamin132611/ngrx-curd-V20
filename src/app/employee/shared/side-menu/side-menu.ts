@@ -10,8 +10,16 @@ import { NgClass } from '@angular/common';
   styleUrl: './side-menu.scss'
 })
 export class SideMenu {
-  @Input() isExpanded: boolean = false;
-  constructor(private router: Router) { }
+  // @Input() isExpanded: boolean = false;
+  userRole: any;
+  constructor(private router: Router) {
+    const userData = localStorage.getItem('login')
+    if (userData != null) {
+      const parsedUser = JSON.parse(userData);
+      const role = parsedUser.isAdmin;
+      this.userRole = role
+    }
+  }
 
   isActiveRoute(path: string): boolean {
     return this.router.url === path || this.router.url.startsWith(path);

@@ -11,7 +11,7 @@
     }
 
     mat-drawer.sideMenu {
-        @apply bg-white shadow-md h-full md:h-[calc(100vh-70px)] overflow-auto rounded-none p-5 absolute top-0 left-0;
+        @apply bg-white w-[12rem] shadow-md h-full md:h-[calc(100vh-70px)] overflow-auto rounded-none p-5 absolute top-0 left-0;
         /* REMOVE any fixed width */
     }
 
