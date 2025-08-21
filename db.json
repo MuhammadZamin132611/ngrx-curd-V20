@@ -2,12 +2,14 @@
   "login": [
     {
       "id": "HtMhEbNi1p0slAXh",
+      "name": "Admin",
       "email": "admin@gmail.com",
       "password": "admin@123",
       "isAdmin": true
     },
     {
-      "id": "26Ldc02NgJVds1Ge",
+      "id": "IsOuSCCNPVxXrM20",
+      "name": "Zamin",
       "email": "zamin@gmail.com",
       "password": "zamin@123",
       "isAdmin": false

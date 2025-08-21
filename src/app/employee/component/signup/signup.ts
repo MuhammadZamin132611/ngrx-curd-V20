@@ -19,6 +19,7 @@ export class Signup {
 
   constructor(private fb: FormBuilder, private router: Router, private toastr: ToastrService, private authService: Auth, private loginService: LoginService) {
     this.signupForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       isAdmin: [false]
@@ -46,6 +47,7 @@ export class Signup {
           else {
             const _obj: LoginModel = {
               id: this._generateId(),
+              name: this.signupForm.value.name,
               email: this.signupForm.value.email,
               password: this.signupForm.value.password,
               isAdmin: this.signupForm.value.isAdmin,
