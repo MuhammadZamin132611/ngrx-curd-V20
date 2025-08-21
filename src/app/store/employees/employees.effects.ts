@@ -9,8 +9,8 @@ import { selectEmployeesLoaded } from "./employees.selectors";
 @Injectable()
 export class EmployeesEffects {
     actions$ = inject(Actions);
-    empService = inject(EmployeeService);
     store = inject(Store);
+    empService = inject(EmployeeService);
 
     loadEmployees$ = createEffect(() =>
         this.actions$.pipe(

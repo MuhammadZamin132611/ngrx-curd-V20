@@ -26,6 +26,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   }
 };
 
+// https://www.youtube.com/watch?v=nHC0wO9JnKw
 
 export const roleGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);

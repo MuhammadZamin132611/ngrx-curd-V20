@@ -66,7 +66,7 @@ export class ViewEmployee implements OnInit, AfterViewInit, OnDestroy {
 
   editEmployee(id: string) {
     console.log(id);
-    this.router.navigate(['dashboard/edti-employee', id])
+    this.router.navigate(['dashboard/home/edti-employee', id])
   }
 
   deleteEmployee(id: string) {

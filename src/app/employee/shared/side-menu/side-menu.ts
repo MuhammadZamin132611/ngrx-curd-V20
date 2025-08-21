@@ -36,12 +36,12 @@ export class SideMenu {
     {
       iconName: 'dashboard_outline',
       listName: 'Dashboard',
-      link: '/dashboard'
+      link: '/dashboard/home'
     },
     {
       iconName: 'person_outline',
       listName: 'Profile',
-      link: '/profile'
+      link: '/dashboard/profile'
     },
     {
       iconName: 'work_outline',

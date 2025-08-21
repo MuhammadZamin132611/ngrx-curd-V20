@@ -6,8 +6,8 @@ import { AddEmployee } from "./add-employee/add-employee";
 import { Dashboard } from "./dashboard/dashboard";
 
 export const employeeDashboard: Routes = [
-    { path: '', component: Dashboard },
-    { path: 'view-employee', component: ViewEmployee },
+    { path: '',title: 'Employee Dashboard',  component: Dashboard },
+    { path: 'view-employee', title: 'View Employee', component: ViewEmployee },
     { path: 'add-employee', component: AddEmployee, title: 'Add Employee', canActivate: [roleGuard], data: { isAdmin: [true] } },
     { path: 'edti-employee/:id', component: EditEmployee, title: 'Edit Employee', canActivate: [roleGuard], data: { isAdmin: [true] } },
 ]
