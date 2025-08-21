@@ -12,12 +12,15 @@ import { NgClass } from '@angular/common';
 export class SideMenu {
   // @Input() isExpanded: boolean = false;
   userRole: any;
+  userName: any;
   constructor(private router: Router) {
     const userData = localStorage.getItem('login')
     if (userData != null) {
       const parsedUser = JSON.parse(userData);
       const role = parsedUser.isAdmin;
-      this.userRole = role
+      this.userRole = role;
+      const name = parsedUser.name;
+      this.userName = name;
     }
   }
 
@@ -37,7 +40,7 @@ export class SideMenu {
     },
     {
       iconName: 'person_outline',
-      listName: 'Profile Search',
+      listName: 'Profile',
       link: '/profile'
     },
     {
