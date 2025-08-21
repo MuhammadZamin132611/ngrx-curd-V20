@@ -11,7 +11,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   if (loggedUser) {
     // ✅ If already logged in and trying to access login/signup
     if (state.url === '/login' || state.url === '/signup') {
-      router.navigateByUrl('/'); // redirect to home/dashboard
+      router.navigateByUrl('/dashboard'); // redirect to home/dashboard
       return false;
     }
     return true; // allow other pages
