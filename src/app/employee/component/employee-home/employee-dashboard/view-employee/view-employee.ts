@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MaterialModule } from '../../../../../Material.module';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -14,7 +14,7 @@ import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-view-employee',
-  imports: [MaterialModule, DatePipe],
+  imports: [MaterialModule, RouterLink, DatePipe],
   templateUrl: './view-employee.html',
   styleUrl: './view-employee.scss'
 })

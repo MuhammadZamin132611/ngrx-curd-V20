@@ -7,7 +7,14 @@
         </div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-2 py-3">
-        <div class="bg-white shadow-md rounded-lg p-3">Welcome</div>
+        <div class="bg-white shadow-md rounded-lg p-3">
+            <div class="flex justify-between items-center">
+                <h2 class="text-xl font-medium">Employee Details</h2>
+                <button class="bg-green-50" routerLink="/dashboard/home/add-employee" mat-button><mat-icon>add</mat-icon>Employee</button>
+            </div>
+            <p class="text-gray-700 text-lg font-semibold py-3">Manage All Employee Details and track easy way</p>
+            <button class="w-full bg-gray-50" routerLink="/dashboard/home/view-employee" mat-button><mat-icon></mat-icon>View All Employee</button>
+        </div>
         <div class="bg-white shadow-md rounded-lg p-3">Performance</div>
     </div>
 </section>
