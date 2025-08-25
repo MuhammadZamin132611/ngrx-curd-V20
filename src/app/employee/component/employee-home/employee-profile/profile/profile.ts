@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { NgClass } from '@angular/common';
 import * as ProfileActions from '../../../../../store/profile/profile.actions'
 import { selectSelectedUser } from '../../../../../store/profile/profile.selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -17,8 +18,9 @@ import { selectSelectedUser } from '../../../../../store/profile/profile.selecto
 export class Profile implements OnInit {
   profileForm: FormGroup;
   user$: any;
+  userId!: string;
 
-  constructor(private fb: FormBuilder, private store: Store) {
+  constructor(private fb: FormBuilder, private store: Store, private router:Router) {
     this.user$ = this.store.select(selectSelectedUser);
     this.profileForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
@@ -29,6 +31,7 @@ export class Profile implements OnInit {
     const userData = localStorage.getItem('login')
     if (userData != null) {
       const parsedUser = JSON.parse(userData);
+      this.userId = parsedUser.id
       this.store.dispatch(ProfileActions.loadProfileById({ id: parsedUser.id }));
     }
   }
@@ -49,11 +52,12 @@ export class Profile implements OnInit {
 
   submitForm() {
     if (this.profileForm.valid) {
-      console.log('Valid', this.profileForm.value);
+      const updatedData = this.profileForm.getRawValue();
+      this.store.dispatch(ProfileActions.updateProfile({ id: this.userId, changes: updatedData }))
+      this.router.navigateByUrl('/dashboard')
     }
     else {
       this.profileForm.markAllAsTouched();
-      console.log('In-Valid', this.profileForm.value);
     }
   }
 

@@ -58,5 +58,26 @@ export const profileReducre = createReducer(
         ...state,
         loading: false,
         error
+    })),
+
+    // Update Profile
+
+    on(ProfileAction.updateProfile, (state) => ({
+        ...state,
+        loading: true
+    })),
+
+    on(ProfileAction.updateProfileSuccess, (state, { users }) => ({
+        ...state,
+        selectedUser: users,
+        user: state.user.map(u => u.id === users.id ? users : u),
+        loading: false,
+        loaded: true
+    })),
+
+    on(ProfileAction.updateProfileFailure, (state, { error }) => ({
+        ...state,
+        loading: false,
+        error
     }))
 )

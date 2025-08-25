@@ -20,4 +20,8 @@ export class ProfileService {
     return this.http.get<LoginModel[]>(`${this.baseUrl}?id=${id}`)
   }
 
+  updateUser(id: string, changes: Partial<LoginModel>): Observable<LoginModel> {
+    return this.http.put<LoginModel>(`${this.baseUrl}/${id}`, changes)
+  }
+
 }

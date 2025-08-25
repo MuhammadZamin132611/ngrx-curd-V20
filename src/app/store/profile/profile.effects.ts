@@ -30,7 +30,7 @@ export class ProfileEffects {
         this.actions$.pipe(
             ofType(ProfileAction.loadProfileById),
             withLatestFrom(this.store.select(selectSelectedUser)),
-            filter(([action, selectedUser])=> !selectedUser || selectedUser.id !== action.id),
+            filter(([action, selectedUser]) => !selectedUser || selectedUser.id !== action.id),
             mergeMap(([action]) =>
                 this.profileService.getUserById(action.id).pipe(
                     map(userArray => ProfileAction.loadProfileByIdSuccess({ users: userArray[0] })),
@@ -38,6 +38,18 @@ export class ProfileEffects {
                 )
             )
         )
-    )
+    );
+
+    updateProfile$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(ProfileAction.updateProfile),
+            mergeMap(action =>
+                this.profileService.updateUser(action.id, action.changes).pipe(
+                    map(updatedUser => ProfileAction.updateProfileSuccess({ users: updatedUser })),
+                    catchError(error => of(ProfileAction.updateProfileFailure({ error })))
+                )
+            )
+        )
+    );
 
 }

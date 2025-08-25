@@ -9,3 +9,6 @@ export const loadProfileById = createAction('[Profile] Load Profile By Id', prop
 export const loadProfileByIdSuccess = createAction('[Profile] Load Profile By Id Success', props<{ users: LoginModel }>());
 export const loadProfileByIdFailure = createAction('[Profile] Load Profile By Id Failure', props<{ error: any }>());
 
+export const updateProfile = createAction('[Profile] Update Profile', props<{ id: string; changes: Partial<LoginModel> }>());
+export const updateProfileSuccess = createAction('[Profile] Update Profile Success', props<{ users: LoginModel }>());
+export const updateProfileFailure = createAction('[Profile] Update Profile Failure', props<{ error: any }>());
