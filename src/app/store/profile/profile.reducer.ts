@@ -4,6 +4,7 @@ import * as ProfileAction from './profile.actions'
 
 export interface ProfileState {
     user: LoginModel[];
+    selectedUser: LoginModel | null;
     loading: boolean;
     loaded: boolean;
     error: any;
@@ -11,6 +12,7 @@ export interface ProfileState {
 
 export const initiatProfileState: ProfileState = {
     user: [],
+    selectedUser: null,
     loading: false,
     loaded: false,
     error: null
@@ -34,7 +36,27 @@ export const profileReducre = createReducer(
 
     on(ProfileAction.loadProfileFailure, (state, { error }) => ({
         ...state,
-        loading:false,
-        error: null
+        loading: false,
+        error
+    })),
+
+    // Get By Id
+
+    on(ProfileAction.loadProfileById, state => ({
+        ...state,
+        loading: true
+    })),
+
+    on(ProfileAction.loadProfileByIdSuccess, (state, { users }) => ({
+        ...state,
+        selectedUser: users,
+        loading: false,
+        loaded: true
+    })),
+
+    on(ProfileAction.loadProfileByIdFailure, (state, { error }) => ({
+        ...state,
+        loading: false,
+        error
     }))
 )

@@ -9,6 +9,11 @@ export const selectAllProfile = createSelector(
     state => state.user
 )
 
+export const selectSelectedUser = createSelector(
+    selectProfileState,
+    state => state.selectedUser
+)
+
 export const selectProfileLoading = createSelector(
     selectProfileState,
     state => state.loading

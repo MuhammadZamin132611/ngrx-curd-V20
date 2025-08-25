@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MaterialModule } from '../../../../../Material.module';
 import { Store } from '@ngrx/store';
 import { NgClass } from '@angular/common';
+import * as ProfileActions from '../../../../../store/profile/profile.actions'
+import { selectSelectedUser } from '../../../../../store/profile/profile.selectors';
 
 @Component({
   selector: 'app-profile',
@@ -14,9 +16,10 @@ import { NgClass } from '@angular/common';
 })
 export class Profile implements OnInit {
   profileForm: FormGroup;
-  userId!: string;
+  user$: any;
 
-  constructor(private profileService: ProfileService, private fb: FormBuilder, private store: Store) {
+  constructor(private fb: FormBuilder, private store: Store) {
+    this.user$ = this.store.select(selectSelectedUser);
     this.profileForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
@@ -26,23 +29,14 @@ export class Profile implements OnInit {
     const userData = localStorage.getItem('login')
     if (userData != null) {
       const parsedUser = JSON.parse(userData);
-      const id = parsedUser.id;
-      this.userId = id;
+      this.store.dispatch(ProfileActions.loadProfileById({ id: parsedUser.id }));
     }
   }
 
-  userData!: LoginModel;
   ngOnInit(): void {
-    this.profileService.getUserById(this.userId).subscribe({
-      next: (data: LoginModel[]) => {
-        this.userData = data[0];
-        console.log(this.userData);
-        this.profileForm.patchValue({
-          name: this.userData.name,
-          email: this.userData.email,
-          password: this.userData.password,
-          isAdmin: this.userData.isAdmin,
-        })
+    this.user$.subscribe({
+      next: (data: LoginModel) => {
+        this.profileForm.patchValue(data)
       }
     })
     this.profileForm.get('email')?.disable();

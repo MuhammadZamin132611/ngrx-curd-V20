@@ -35,13 +35,14 @@
                 <input matInput formControlName="password" [type]="showHidePassword?'text':'password'"
                     placeholder="*******">
                 <div class="relative">
-                    @if(!showHidePassword){
-                    <mat-icon (click)="showPassword()" class="absolute right-0 bottom-2">visibility_lock</mat-icon>
+                    @if(showHidePassword){
+                    <mat-icon (click)="showPassword()" class="absolute right-0 bottom-2">visibility_off</mat-icon>
                     }
                     @else {
                     <mat-icon (click)="showPassword()" class="absolute right-0 bottom-2">visibility</mat-icon>
                     }
                 </div>
+                <div></div>
             </div>
             @if (profileForm.get('password')?.touched && profileForm.get('password')?.invalid) {
             <mat-error class="text-[#93000A] text-sm">
