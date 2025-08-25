@@ -1,3 +1,62 @@
 <section class="p-5">
     <h1 class="text-2xl font-semibold">Employee Profile</h1>
+    <form [formGroup]="profileForm" (ngSubmit)="submitForm()" class="grid grid-cols-1 gap-2 pt-5">
+        <mat-form-field class="example-full-width">
+            <mat-label>Full Name</mat-label>
+            <input matInput formControlName="name" placeholder="Ex. example@gmail.com">
+            @if (profileForm.get('name')?.touched && profileForm.get('name')?.invalid) {
+            <mat-error class="text-[#93000A] text-sm">
+                @if (profileForm.get('name')?.errors?.['required']) {
+                Please enter your full name
+                }
+                @if (profileForm.get('name')?.errors?.['minlength']) {
+                Please enter minimum 3 letters.
+                }
+            </mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Email ID</mat-label>
+            <input matInput formControlName="email" placeholder="Ex. example@gmail.com">
+            @if (profileForm.get('email')?.touched && profileForm.get('email')?.invalid) {
+            <mat-error class="text-[#93000A] text-sm">
+                @if (profileForm.get('email')?.errors?.['required']) {
+                Please enter your email
+                }
+                @if (profileForm.get('email')?.errors?.['email']) {
+                Please enter a valid email ID
+                }
+            </mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <div>
+                <input matInput formControlName="password" [type]="showHidePassword?'text':'password'"
+                    placeholder="*******">
+                <div class="relative">
+                    @if(!showHidePassword){
+                    <mat-icon (click)="showPassword()" class="absolute right-0 bottom-2">visibility_lock</mat-icon>
+                    }
+                    @else {
+                    <mat-icon (click)="showPassword()" class="absolute right-0 bottom-2">visibility</mat-icon>
+                    }
+                </div>
+            </div>
+            @if (profileForm.get('password')?.touched && profileForm.get('password')?.invalid) {
+            <mat-error class="text-[#93000A] text-sm">
+                @if (profileForm.get('password')?.errors?.['required']) {
+                Please enter your password
+                }
+                @if (profileForm.get('password')?.errors?.['password']) {
+                Please enter minimum 6 digit password
+                }
+            </mat-error>
+            }
+        </mat-form-field>
+        <mat-checkbox formControlName="isAdmin">Admin</mat-checkbox>
+        <button mat-button type="submit"
+            [ngClass]="{'bg-green-500':this.profileForm.valid, 'bg-red-500':this.profileForm.invalid}"
+            class="mt-3 text-white"><mat-icon>person_outline</mat-icon> Sign Up</button>
+    </form>
 </section>

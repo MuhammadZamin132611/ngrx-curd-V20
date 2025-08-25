@@ -25,9 +25,9 @@ export const profileReducre = createReducer(
         loading: true
     })),
 
-    on(ProfileAction.loadProfileSuccess, (state, { user }) => ({
+    on(ProfileAction.loadProfileSuccess, (state, { users }) => ({
         ...state,
-        user,
+        users,
         loading: false,
         loaded: true
     })),

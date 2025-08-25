@@ -10,6 +10,8 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { employeesReducer } from './store/employees/employees.reducer';
 import { EmployeesEffects } from './store/employees/employees.effects';
+import { ProfileEffects } from './store/profile/profile.effects';
+import { profileReducre } from './store/profile/profile.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,8 +21,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideToastr(),
     provideHttpClient(),
-    provideStore({employees:employeesReducer}),
-    provideEffects([EmployeesEffects]),
+    provideStore({ employees: employeesReducer, profile: profileReducre }),
+    provideEffects([EmployeesEffects, ProfileEffects]),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
-]
+  ]
 };

@@ -9,7 +9,7 @@
                     @if (signupForm.get('name')?.touched && signupForm.get('name')?.invalid) {
                     <mat-error class="text-[#93000A] text-sm">
                         @if (signupForm.get('name')?.errors?.['required']) {
-                        Please enter your email
+                        Please enter your full name.
                         }
                         @if (signupForm.get('name')?.errors?.['minlength']) {
                         Please enter minimum 3 letters.

@@ -15,4 +15,9 @@ export class ProfileService {
     // return this.http.get<LoginModel>(`${this.baseUrl}?id=${id}`)
   }
 
+  getUserById(id: string): Observable<LoginModel[]> {
+    // return this.http.get<LoginModel>(`${this.baseUrl}`)
+    return this.http.get<LoginModel[]>(`${this.baseUrl}?id=${id}`)
+  }
+
 }
