@@ -1,7 +1,7 @@
 <mat-toolbar class="bg-[#D7E3FF]">
     <div class="flex gap-3">
         <div class="flex items-center gap-1">
-            <button matIconButton class="example-icon" aria-label="Example icon-button with menu icon">
+            <button (click)="toggleMenu()" matIconButton class="example-icon" aria-label="Example icon-button with menu icon">
                 <mat-icon>menu_open</mat-icon>
             </button>
             <span><a routerLink="/dashboard" class="font-medium">Employee</a></span>

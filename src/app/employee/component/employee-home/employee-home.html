@@ -1,7 +1,7 @@
 <app-header />
 <section class="bg-gray-100">
     <mat-drawer-container autosize class="drawerContainer">
-        <mat-drawer class="sideMenu" #drawer [opened]="isMenuOpen" [disableClose]="isMenuOpen" [mode]="drawerMode"
+        <mat-drawer class="sideMenu" #drawer [opened]="isMenuOpen" [disableClose]="drawerMode === 'over'" [mode]="drawerMode"
             position="start" >
             <app-side-menu />
         </mat-drawer>

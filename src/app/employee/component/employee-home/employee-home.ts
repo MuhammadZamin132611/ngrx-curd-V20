@@ -6,6 +6,7 @@ import { SideMenu } from "../../shared/side-menu/side-menu";
 import { MatDialog } from '@angular/material/dialog';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { NgClass } from '@angular/common';
+import { SidebarService } from '../../services/sidebar-service';
 
 @Component({
   selector: 'app-employee-home',
@@ -24,6 +25,7 @@ export class EmployeeHome {
     private breakpointObserver: BreakpointObserver,
     private router: Router,
     private dialog: MatDialog,
+    private drawerService: SidebarService
   ) { }
 
   ngOnInit() {
@@ -38,20 +40,20 @@ export class EmployeeHome {
         this.drawerMode = 'over';
         this.advertisement = false;
         this.isMenuOpen = false;
-        // this.drawerService.setDrawerState(false);
+        this.drawerService.setDrawerState(false);
       } else {
         // For screens > 767px (tablet & desktop)
         this.drawerMode = 'side';
         this.isMenuOpen = true;
         this.advertisement = !result.breakpoints[Breakpoints.Medium]; // Show ad only on large screens
-        // this.drawerService.setDrawerState(true);
+        this.drawerService.setDrawerState(true);
       }
     });
 
     // Keep sidebar state synced with service
-    // this.drawerService.isOpen$.subscribe(state => {
-    //   this.isMenuOpen = state;
-    // });
+    this.drawerService.isOpen$.subscribe(state => {
+      this.isMenuOpen = state;
+    });
     
     this.checkScreen();
     window.addEventListener('resize', this.checkScreen.bind(this));

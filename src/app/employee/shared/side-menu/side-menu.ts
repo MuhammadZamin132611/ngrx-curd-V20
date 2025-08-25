@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MaterialModule } from '../../../Material.module';
 import { NgClass } from '@angular/common';
+import { SidebarService } from '../../services/sidebar-service';
 
 @Component({
   selector: 'app-side-menu',
@@ -13,7 +14,7 @@ export class SideMenu {
   // @Input() isExpanded: boolean = false;
   userRole: any;
   userName: any;
-  constructor(private router: Router) {
+  constructor(private router: Router, private sidebarService: SidebarService) {
     const userData = localStorage.getItem('login')
     if (userData != null) {
       const parsedUser = JSON.parse(userData);
@@ -24,12 +25,13 @@ export class SideMenu {
     }
   }
 
+
   isActiveRoute(path: string): boolean {
     return this.router.url === path || this.router.url.startsWith(path);
   }
 
   toggleMenu() {
-    // this.sidebarService.toggleDrawer();
+    this.sidebarService.toggleDrawer();
   }
 
   menuList: list[] = [
