@@ -46,12 +46,12 @@ export class SideMenu {
     {
       iconName: 'work_outline',
       listName: 'Projects',
-      link: '/project'
+      link: '/dashboard/project'
     },
     {
       iconName: 'calendar_today',
       listName: 'Calender',
-      link: '/calender'
+      link: '/dashboard/calender'
     },
   ]
 
