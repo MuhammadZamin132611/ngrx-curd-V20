@@ -1,1 +1,62 @@
-<p>calender works!</p>
+<div class="flex h-screen font-sans">
+
+    <!-- Main Calendar -->
+    <main class="flex-1 p-6">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-semibold">Calendar</h2>
+            <button mat-flat-button><mat-icon>add</mat-icon> New</button>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="flex justify-between items-center border-b pb-2 mb-4">
+            <span class="font-medium">September 9, 2024</span>
+            <div class="space-x-2">
+                <button class="px-3 py-1 border rounded hover:bg-gray-100">&lt;</button>
+                <button class="px-3 py-1 border rounded hover:bg-gray-100">Today</button>
+                <button class="px-3 py-1 border rounded hover:bg-gray-100">&gt;</button>
+                <select class="border rounded px-2 py-1">
+                    <option>Week</option>
+                    <option>Day</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="grid grid-cols-6 border-t border-l">
+            <!-- Time Column -->
+            <div>
+                @for(time of times; track $index){
+                <div class="h-16 border-b border-r flex items-center justify-center text-sm text-gray-600">
+                    {{ time }}
+                </div>
+                }
+            </div>
+
+            <!-- Days Columns -->
+            @for(day of days; track $index){
+            <div class="relative border-r">
+                <!-- Day Header -->
+                <div class="h-12 flex items-center justify-center font-medium border-b">
+                    {{ day }}
+                </div>
+
+                <!-- Time Slots -->
+                @for(time of times; track $index){
+                <div class="h-16 border-b"></div>
+                }
+
+                <!-- Events -->
+                @for(event of events; track $index){
+                @if(event.day === day){
+                <div class="absolute left-2 right-2 text-white rounded-lg p-2 text-sm shadow"
+                    [ngStyle]="{'top': (event.startIndex * 64) + 'px', 'background-color': event.color}">
+                    {{ event.title }}
+                </div>
+                }
+                }
+            </div>
+            }
+        </div>
+    </main>
+</div>
