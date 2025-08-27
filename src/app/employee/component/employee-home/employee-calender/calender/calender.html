@@ -1,59 +1,77 @@
-<div class="flex h-screen font-sans">
+<div class="flex h-screen font-sans overflow-hidden">
 
-  <!-- Main Calendar -->
-  <main class="flex-1 p-6">
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-semibold">Weekly Calendar</h2>
-      <button mat-flat-button><mat-icon>add</mat-icon> New</button>
-    </div>
-
-    <!-- Toolbar -->
-    <div class="flex justify-between items-center border-b pb-2 mb-4">
-      <span class="font-medium">
-        Week of {{ currentWeekStart() | date: 'MMM d, yyyy' }}
-      </span>
-      <div class="flex items-center gap-1">
-        <button matMiniFab class="bg-transparent" (click)="prevWeek()"><mat-icon>chevron_left</mat-icon></button>
-        <button matButton="elevated" extended (click)="today()">Today</button>
-        <button matMiniFab class="bg-transparent" (click)="nextWeek()"><mat-icon>chevron_right</mat-icon></button>
-      </div>
-    </div>
-
-    <!-- Calendar Grid -->
-    <div class="grid grid-cols-8 border-t border-l">
-      
-      <!-- Time Column -->
-      <div>
-        @for(time of times(); track $index) {
-          <div class="h-16 border-b border-r flex items-center justify-center text-sm text-gray-600">
-            {{ time }}
-          </div>
-        }
-      </div>
-
-      <!-- Days Columns -->
-      @for(day of days(); track $index) {
-        <div class="relative border-r">
-          <!-- Day Header -->
-          <div class="h-16 flex items-center justify-center font-medium border-b text-gray-700">
-            {{ day | date:'EEEE, dd MMM' }}
-          </div>
-
-          <!-- Time Slots -->
-          @for(time of times(); track $index) {
-            <div class="h-16 border-b"></div>
-          }
-
-          <!-- Events -->
-          @for(event of eventsForDay(day)(); track $index) {
-            <div class="absolute left-2 right-2 text-gray-700 bg-blue-100 rounded-lg p-2 text-sm shadow"
-                 [ngStyle]="{'top': (event.startIndex * 68) + 'px'}">
-              {{ event.title }}
+    <!-- Main Calendar -->
+    <main class="flex-1 overflow-auto">
+        <!-- Header -->
+        <div class="sticky top-0 z-30 bg-[#FAF9FD] px-4 pt-4 sm:px-6 sm:pt-6">
+            <div class="flex justify-between mb-4 gap-2">
+                <h2 class="text-lg sm:text-xl font-semibold">Weekly Calendar</h2>
+                <button mat-flat-button><mat-icon>add</mat-icon> New</button>
             </div>
-          }
+
+            <!-- Toolbar -->
+            <div class="flex justify-between items-center border-b pb-2 mb-4 gap-2">
+                <span class="font-medium text-sm sm:text-base">
+                    Week of {{ currentWeekStart() | date: 'MMM dd, yyyy' }}
+                </span>
+                <div class="flex items-center gap-1">
+                    <button mat-mini-fab class="bg-transparent"
+                        (click)="prevWeek()"><mat-icon>chevron_left</mat-icon></button>
+                    <button mat-raised-button (click)="today()">Today</button>
+                    <button mat-mini-fab class="bg-transparent"
+                        (click)="nextWeek()"><mat-icon>chevron_right</mat-icon></button>
+                </div>
+            </div>
         </div>
-      }
-    </div>
-  </main>
+        <!-- Calendar Grid -->
+        <div class="overflow-x-auto ">
+            <div class="grid grid-cols-[80px_repeat(7,minmax(150px,1fr))] border-t border-l min-w-[900px]">
+
+                <!-- Time Column -->
+                <div class="sticky left-0 z-20 bg-white">
+                    @for(time of times(); track $index) {
+                    <div
+                        class="h-16 border-b border-r flex items-center justify-center text-xs sm:text-sm text-gray-600">
+                        {{ time }}
+                    </div>
+                    }
+                </div>
+
+                <!-- Days Columns -->
+                @for(day of days(); track $index) {
+                <div class="relative border-r min-w-[150px]">
+                    <!-- Day Header -->
+                    <div
+                        class="h-16 flex items-center justify-center font-medium border-b text-gray-700 text-xs sm:text-sm  ">
+                        {{ day | date:'EEEE, dd MMM' }}
+                    </div>
+
+                    <!-- Time Slots -->
+                    <!-- @for(time of times(); track $index) {
+                    <div class="h-16 border-b cursor-pointer hover:bg-blue-100 transition-colors duration-200"></div>
+                    } -->
+                    @for(time of times(); track $index) {
+                    <div
+                        class="h-16 border-b cursor-pointer hover:bg-blue-100 transition-colors duration-200 relative group">
+                        <!-- Custom tooltip (if you don’t like native browser tooltip) -->
+                        <!-- <div
+                            class="absolute bottom-5 left-1/2 -translate-x-1/2 px-2 py-1 text-xs bg-gray-800 text-white rounded opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap">
+                            {{ day | date:'EEEE, dd MMM' }} {{ time }}
+                        </div> -->
+                    </div>
+                    }
+
+
+                    <!-- Events -->
+                    @for(event of eventsForDay(day)(); track $index) {
+                    <div class="absolute left-1 sm:left-2 right-1 sm:right-2 text-gray-700 rounded-lg p-1 sm:p-2 text-xs sm:text-sm shadow"
+                        [ngStyle]="{ 'top': (getTimeIndex(event.startTime) * 64 + 64) + 'px', 'height': event.endTime ? ((getTimeIndex(event.endTime) - getTimeIndex(event.startTime)) * 64) + 'px': '64px','background-color': event.color || '#bfdbfe'}">
+                        {{ event.title }}
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+        </div>
+    </main>
 </div>
