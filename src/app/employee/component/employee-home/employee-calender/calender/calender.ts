@@ -1,6 +1,7 @@
 import { DatePipe, NgStyle } from '@angular/common';
 import { Component, computed, signal } from '@angular/core';
 import { MaterialModule } from '../../../../../Material.module';
+import { RouterLink } from '@angular/router';
 
 interface CalendarEvent {
   title: string;
@@ -12,7 +13,7 @@ interface CalendarEvent {
 
 @Component({
   selector: 'app-calender',
-  imports: [MaterialModule, NgStyle, DatePipe],
+  imports: [MaterialModule, NgStyle, DatePipe, RouterLink],
   templateUrl: './calender.html',
   styleUrl: './calender.scss'
 })

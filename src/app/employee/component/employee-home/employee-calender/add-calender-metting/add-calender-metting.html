@@ -1,0 +1,109 @@
+<div class="p-6 bg-white text-gray-700 min-h-screen" [formGroup]="meetingForm">
+  <!-- Header -->
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-xl font-semibold">New meeting <span class="text-gray-400">Details</span></h2>
+    <div class="flex gap-2">
+      <button mat-flat-button color="primary" (click)="saveMeeting()">Save</button>
+      <button routerLink="/dashboard/calender" mat-stroked-button color="warn">Close</button>
+    </div>
+  </div>
+
+  <!-- Time zone -->
+  <p class="text-sm text-gray-400 mb-4">
+    Time zone: (UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi
+  </p>
+
+  <!-- Title -->
+  <mat-form-field class="w-full mb-4" appearance="fill">
+    <mat-label>Add title</mat-label>
+    <input matInput formControlName="title" />
+  </mat-form-field>
+
+  <!-- Participants -->
+  <mat-form-field class="w-full mb-4" appearance="fill">
+    <mat-label>Enter name, email or phone number</mat-label>
+    <input matInput formControlName="participants" />
+  </mat-form-field>
+
+  <!-- Date & Time -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+    <!-- Start Date -->
+    <mat-form-field appearance="fill">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="startDate">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Start Time -->
+    <mat-form-field appearance="fill">
+      <mat-label>Start Time</mat-label>
+      <mat-select formControlName="startTime">
+        @for(t of times; track $index){
+          <mat-option [value]="t.value">{{ t.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <!-- End Date -->
+    <mat-form-field appearance="fill">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker2" formControlName="endDate">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <!-- End Time -->
+    <mat-form-field appearance="fill">
+      <mat-label>End Time</mat-label>
+      <mat-select formControlName="endTime">
+        @for(t of times; track $index){
+        <mat-option [value]="t.value">{{ t.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Repeat -->
+  <mat-form-field class="w-full mb-4" appearance="fill">
+    <mat-label>Repeat</mat-label>
+    <mat-select formControlName="repeat">
+      <mat-option value="none">Does not repeat</mat-option>
+      <mat-option value="daily">Daily</mat-option>
+      <mat-option value="weekly">Weekly</mat-option>
+      <mat-option value="monthly">Monthly</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Location -->
+  <mat-form-field class="w-full mb-4" appearance="fill">
+    <mat-label>Add location</mat-label>
+    <input matInput formControlName="location" />
+  </mat-form-field>
+
+  <!-- Meeting Details -->
+  <mat-form-field class="w-full mb-6" appearance="fill">
+    <mat-label>Type details for this new meeting</mat-label>
+    <textarea matInput rows="4" formControlName="details"></textarea>
+  </mat-form-field>
+
+  <!-- Options -->
+  <div class="grid grid-cols-2 gap-6">
+    <mat-form-field appearance="fill">
+      <mat-label>Who can bypass the lobby?</mat-label>
+      <mat-select formControlName="bypassLobby">
+        <mat-option value="invited">People who were invited</mat-option>
+        <mat-option value="everyone">Everyone</mat-option>
+        <mat-option value="onlyme">Only me</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Who can present?</mat-label>
+      <mat-select formControlName="presenter">
+        <mat-option value="everyone">Everyone</mat-option>
+        <mat-option value="onlyme">Only me</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
