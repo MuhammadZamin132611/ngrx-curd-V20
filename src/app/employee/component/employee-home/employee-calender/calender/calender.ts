@@ -28,11 +28,11 @@ export class Calender {
 
   // Mock events
   events = signal<CalendarEvent[]>([
-    { title: 'Team Meeting', date: new Date('2025-08-25'), startTime: '09:30', endTime: '11:00', color: '#93c5fd' },
-    { title: 'Meeting', date: new Date('2025-08-25'), startTime: '12:30', endTime: '14:00', color: '#93c5fd' },
-    { title: 'Client Call', date: new Date('2025-08-27'), startTime: '13:00', endTime: '14:30', color: '#fcd34d' },
-    { title: 'Team Meeting', date: new Date('2025-08-26'), startTime: '10:30', endTime: '11:30', color: '#93c5fd' },
-    { title: 'Workshop', date: new Date('2025-08-28'), startTime: '15:00', endTime: '17:00', color: '#bbf7d0' }
+    { title: 'Team Meeting', date: new Date('2025-09-25'), startTime: '09:30', endTime: '11:00', color: '#93c5fd' },
+    { title: 'Meeting', date: new Date('2025-09-25'), startTime: '12:30', endTime: '14:00', color: '#93c5fd' },
+    { title: 'Client Call', date: new Date('2025-09-27'), startTime: '13:00', endTime: '14:30', color: '#fcd34d' },
+    { title: 'Team Meeting', date: new Date('2025-09-26'), startTime: '10:30', endTime: '11:30', color: '#93c5fd' },
+    { title: 'Workshop', date: new Date('2025-09-28'), startTime: '15:00', endTime: '17:00', color: '#bbf7d0' }
   ]);
 
   // Compute 7 days for current week

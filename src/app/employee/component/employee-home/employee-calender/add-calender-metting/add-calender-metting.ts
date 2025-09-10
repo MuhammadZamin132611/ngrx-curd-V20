@@ -10,10 +10,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './add-calender-metting.scss'
 })
 export class AddCalenderMetting {
-meetingForm!: FormGroup;
+  meetingForm!: FormGroup;
   times: { value: string, label: string }[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.generateTimeSlots();
