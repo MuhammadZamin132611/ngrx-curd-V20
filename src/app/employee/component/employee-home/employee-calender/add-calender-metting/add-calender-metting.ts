@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { MaterialModule } from '../../../../../Material.module';
 import { RouterLink } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CalenderService } from '../../../../services/calender-service';
+import { CalenderModel } from '../../../../model/calender.model';
 
 @Component({
   selector: 'app-add-calender-metting',
@@ -13,7 +15,7 @@ export class AddCalenderMetting {
   meetingForm!: FormGroup;
   times: { value: string, label: string }[] = [];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private _service: CalenderService) { }
 
   ngOnInit(): void {
     this.generateTimeSlots();
@@ -29,7 +31,7 @@ export class AddCalenderMetting {
 
     this.meetingForm = this.fb.group({
       title: [''],
-      participants: [''],
+      participants: ['', [Validators.required]],
       startDate: [now],
       startTime: [this.times.find(t => t.value === startTime)?.value],
       endDate: [now],
@@ -54,6 +56,19 @@ export class AddCalenderMetting {
     }
   }
 
+  _generateId(length: number = 16): string {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let id = '';
+    for (let i = 0; i < length; i++) {
+      id += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return id;
+  }
+
+  addMeetInCalender() {
+
+  }
+
   roundToNearest30(date: Date): Date {
     const minutes = date.getMinutes();
     const roundedMinutes = minutes < 30 ? 0 : 30;
@@ -62,6 +77,31 @@ export class AddCalenderMetting {
   }
 
   saveMeeting() {
-    console.log(this.meetingForm.value);
+    if (this.meetingForm.valid) {
+      const _CalenderObj: CalenderModel = {
+        id: this._generateId(),
+        title: this.meetingForm.value.title,
+        participants: this.meetingForm.value.participants,
+        startDate: this.meetingForm.value.startDate,
+        startTime: this.meetingForm.value.startTime,
+        endDate: this.meetingForm.value.endDate,
+        endTime: this.meetingForm.value.endTime,
+        location: this.meetingForm.value.location,
+        details: this.meetingForm.value.details,
+        repeat: this.meetingForm.value.repeat,
+        bypassLobby: this.meetingForm.value.bypassLobby,
+        presenter: this.meetingForm.value.presenter,
+      }
+
+      this._service.addCalender(_CalenderObj).subscribe({
+        next: () => {
+          console.log('Valid', _CalenderObj);
+
+        }
+      })
+    }
+    else {
+      console.log('InValid', this.meetingForm.value);
+    }
   }
 }

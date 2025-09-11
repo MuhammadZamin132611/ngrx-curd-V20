@@ -1,7 +1,9 @@
 import { DatePipe, NgStyle } from '@angular/common';
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { MaterialModule } from '../../../../../Material.module';
 import { RouterLink } from '@angular/router';
+import { CalenderService } from '../../../../services/calender-service';
+import { CalenderModel } from '../../../../model/calender.model';
 
 interface CalendarEvent {
   title: string;
@@ -18,8 +20,7 @@ interface CalendarEvent {
   styleUrl: './calender.scss'
 })
 
-
-export class Calender {
+export class Calender implements OnInit {
   // Time slots (9AM - 5PM)
   times = signal(['', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM', '6 PM', '7 PM', '8 PM', '9 PM', '10 PM', '11 PM']);
 
@@ -27,13 +28,12 @@ export class Calender {
   currentWeekStart = signal(this.getStartOfWeek(new Date()));
 
   // Mock events
-  events = signal<CalendarEvent[]>([
-    { title: 'Team Meeting', date: new Date('2025-09-25'), startTime: '09:30', endTime: '11:00', color: '#93c5fd' },
-    { title: 'Meeting', date: new Date('2025-09-25'), startTime: '12:30', endTime: '14:00', color: '#93c5fd' },
-    { title: 'Client Call', date: new Date('2025-09-27'), startTime: '13:00', endTime: '14:30', color: '#fcd34d' },
-    { title: 'Team Meeting', date: new Date('2025-09-26'), startTime: '10:30', endTime: '11:30', color: '#93c5fd' },
-    { title: 'Workshop', date: new Date('2025-09-28'), startTime: '15:00', endTime: '17:00', color: '#bbf7d0' }
-  ]);
+  events = signal<CalendarEvent[]>([]);
+  // { title: 'Team Meeting', date: new Date('2025-09-25'), startTime: '09:30', endTime: '11:00', color: '#93c5fd' },
+  // { title: 'Meeting', date: new Date('2025-09-25'), startTime: '12:30', endTime: '14:00', color: '#93c5fd' },
+  // { title: 'Client Call', date: new Date('2025-09-27'), startTime: '13:00', endTime: '14:30', color: '#fcd34d' },
+  // { title: 'Team Meeting', date: new Date('2025-09-26'), startTime: '10:30', endTime: '11:30', color: '#93c5fd' },
+  // { title: 'Workshop', date: new Date('2025-09-28'), startTime: '15:00', endTime: '17:00', color: '#bbf7d0' }
 
   // Compute 7 days for current week
   days = computed(() => {
@@ -46,6 +46,27 @@ export class Calender {
     }
     return daysArray;
   });
+
+  constructor(private _service: CalenderService) { }
+
+  ngOnInit(): void {
+
+    this._service.getCalender().subscribe({
+      next: (data: CalenderModel[]) => {
+        this.events.set(
+          data.map(items => ({
+            title: items.title,
+            date: new Date(items.startDate),
+            startTime: items.startTime,
+            endTime: items.endTime,
+            color: '#93c5fd'
+          }))
+        )
+      },
+      error: err => console.error(err)
+    })
+
+  }
 
   // Filter events for a given day
   eventsForDay = (day: Date) => computed(() =>
@@ -76,15 +97,11 @@ export class Calender {
 
   // Utility to get Monday of a given date
   getStartOfWeek(date: Date): Date {
-    const day = date.getDay(); // Sunday=0, Monday=1
-    const diff = day === 0 ? -6 : 1 - day; // shift Sunday to previous Monday
+    const day = date.getDay();
+    const diff = day === 0 ? -6 : 1 - day;
     const monday = new Date(date);
     monday.setDate(date.getDate() + diff);
     return monday;
-    // const day = date.getDay(); // Sunday = 0
-    // const sunday = new Date(date);
-    // sunday.setDate(date.getDate() - day); // go back to Sunday
-    // return sunday;
   }
 
 }

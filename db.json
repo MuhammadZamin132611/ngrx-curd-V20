@@ -96,6 +96,59 @@
       "employeeType": "full-time",
       "startDate": "2025-08-01T18:30:00.000Z",
       "endDate": "2025-08-28T18:30:00.000Z"
+    },
+    {
+      "id": "KBldTWcERCwVgz83",
+      "employeeName": "Keshav",
+      "employeeTitle": "Sales-Force",
+      "location": "Noida Sector 62",
+      "employeeType": "full-time",
+      "startDate": "2021-07-14T18:30:00.000Z",
+      "endDate": "2025-09-09T18:30:00.000Z"
+    }
+  ],
+  "calender": [
+    {
+      "id": "Ad5w9fw2kbi8BYLK",
+      "title": "Client Meet",
+      "participants": "zamin@gmail.com",
+      "startDate": "2025-09-11T09:00:00.000Z",
+      "startTime": "14:30",
+      "endDate": "2025-09-11T09:00:00.000Z",
+      "endTime": "15:00",
+      "location": "New Delhi",
+      "details": "Discuss about projects",
+      "repeat": "daily",
+      "bypassLobby": "everyone",
+      "presenter": "everyone"
+    },
+    {
+      "id": "gNh1j3ZESKDM5Zt6",
+      "title": "Client Meet",
+      "participants": "ram@gmail.com, shyam@gmail.com",
+      "startDate": "2025-09-11T09:00:00.000Z",
+      "startTime": "15:30",
+      "endDate": "2025-09-11T09:00:00.000Z",
+      "endTime": "16:00",
+      "location": "Noida",
+      "details": "Discuss about projects",
+      "repeat": "daily",
+      "bypassLobby": "everyone",
+      "presenter": "everyone"
+    },
+    {
+      "id": "4DAJw3tWHdh0GN5c",
+      "title": "Screen Screen Screen Screen",
+      "participants": "zamin@gmail.com",
+      "startDate": "2025-09-11T09:00:00.000Z",
+      "startTime": "9:30",
+      "endDate": "2025-09-11T09:00:00.000Z",
+      "endTime": "11:00",
+      "location": "",
+      "details": "Screening the project",
+      "repeat": "none",
+      "bypassLobby": "invited",
+      "presenter": "everyone"
     }
   ]
 }
