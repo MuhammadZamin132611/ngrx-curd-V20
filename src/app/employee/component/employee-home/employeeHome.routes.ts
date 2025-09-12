@@ -10,6 +10,10 @@ export const employeeHomeRoutes: Routes = [
                 loadChildren: () => import('./employee-dashboard/employeeDashboard.routes').then(r => r.employeeDashboard)
             },
             {
+                path: 'chat',
+                loadChildren: () => import('./employee-chat/employeeChat.routes').then(r => r.chatRoutes)
+            },
+            {
                 path: 'profile',
                 loadChildren: () => import('./employee-profile/employeeProfile.routes').then(r => r.employeeProfile)
             },

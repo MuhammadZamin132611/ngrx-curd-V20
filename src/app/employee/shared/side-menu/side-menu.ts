@@ -41,6 +41,11 @@ export class SideMenu {
       link: '/dashboard/home'
     },
     {
+      iconName: 'chat_outline',
+      listName: 'Chat',
+      link: '/dashboard/chat'
+    },
+    {
       iconName: 'person_outline',
       listName: 'Profile',
       link: '/dashboard/profile'

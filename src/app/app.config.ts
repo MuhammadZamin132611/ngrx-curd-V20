@@ -23,6 +23,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore({ employees: employeesReducer, profile: profileReducre }),
     provideEffects([EmployeesEffects, ProfileEffects]),
-    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() })
+    provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    
   ]
 };
