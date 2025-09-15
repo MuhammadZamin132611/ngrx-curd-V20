@@ -15,7 +15,7 @@ export class LoginService {
     return this.http.get<LoginModel[]>(this.baseurl).pipe(
       map(users => users.some(
         user => user.email.toLowerCase() === email.toLowerCase() &&
-        user.password.toLowerCase() === password.toLowerCase()
+          user.password.toLowerCase() === password.toLowerCase()
       ))
     );
   }
@@ -24,7 +24,7 @@ export class LoginService {
     return this.http.post<LoginModel>(`${this.baseurl}`, data);
   }
 
-  checkUser(email: string, password: string) {
+  checkUser(email: string | undefined, password: string | undefined) {
     return this.http.get<LoginModel[]>(`${this.baseurl}?email=${email}&password=${password}`);
   }
 
