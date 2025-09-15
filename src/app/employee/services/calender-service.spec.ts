@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { CalenderService } from './calender-service';
 import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
 import { CalenderModel } from '../model/calender.model';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('CalenderService', () => {
   let service: CalenderService;
@@ -12,8 +13,11 @@ describe('CalenderService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [provideHttpClientTesting()],
-      providers: [CalenderService]
+      providers: [
+        CalenderService,
+        provideHttpClient(), // ✅ Provides the HttpClient
+        provideHttpClientTesting()
+      ]
       // providers: [CalenderService, provideHttpClientTesting()]
     });
 
