@@ -15,12 +15,12 @@ export class ProfileService {
     // return this.http.get<LoginModel>(`${this.baseUrl}?id=${id}`)
   }
 
-  getUserById(id: string): Observable<LoginModel[]> {
+  getUserById(id: string | undefined): Observable<LoginModel[]> {
     // return this.http.get<LoginModel>(`${this.baseUrl}`)
     return this.http.get<LoginModel[]>(`${this.baseUrl}?id=${id}`)
   }
 
-  updateUser(id: string, changes: Partial<LoginModel>): Observable<LoginModel> {
+  updateUser(id: string | undefined, changes: Partial<LoginModel>): Observable<LoginModel> {
     return this.http.put<LoginModel>(`${this.baseUrl}/${id}`, changes)
   }
 

@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { LoginModel } from "../../employee/model/login.model";
 import { ProfileState } from "./profile.reducer";
 
 export const selectProfileState = createFeatureSelector<ProfileState>('profile');
