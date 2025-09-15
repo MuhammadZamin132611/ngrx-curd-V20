@@ -1,10 +1,10 @@
 export interface CalenderModel {
     id?: string;
     title: string;
-    participants: string[];
-    startDate: Date;
+    participants: string;
+    startDate: string;
     startTime: string;
-    endDate: Date;
+    endDate: string;
     endTime: string;
     location: string;
     details: string;

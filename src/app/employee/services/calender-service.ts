@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CalenderService {
-  protected readonly baseUrl: string = 'http://localhost:3000/calender';
+  baseUrl: string = 'http://localhost:3000/calender';
 
   constructor(private http: HttpClient) { }
 
@@ -15,7 +15,7 @@ export class CalenderService {
     return this.http.get<CalenderModel[]>(`${this.baseUrl}`);
   }
 
-  getByIdCalender(id: string): Observable<CalenderModel> {
+  getByIdCalender(id: string | undefined): Observable<CalenderModel> {
     return this.http.get<CalenderModel>(`${this.baseUrl}/${id}`)
   }
 
@@ -23,11 +23,11 @@ export class CalenderService {
     return this.http.post<CalenderModel>(`${this.baseUrl}`, data);
   }
 
-  updateCalender(id: string, data: CalenderModel): Observable<CalenderModel> {
+  updateCalender(id: string | undefined, data: CalenderModel): Observable<CalenderModel> {
     return this.http.put<CalenderModel>(`${this.baseUrl}/${id}`, data);
   }
 
-  deleteCalender(id: string) {
+  deleteCalender(id: string | undefined) {
     return this.http.delete(`${this.baseUrl}/${id}`)
   }
 

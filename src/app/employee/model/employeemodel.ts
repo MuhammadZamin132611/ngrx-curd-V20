@@ -4,6 +4,6 @@ export interface EmployeeModel {
     employeeTitle: string;
     location: string;
     employeeType: string;
-    startDate: Date;
-    endDate: Date;
+    startDate: string;
+    endDate: string;
 }

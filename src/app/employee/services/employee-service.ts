@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmployeeService {
-  protected readonly baseUrl: string = 'http://localhost:3000/employee';
+  baseUrl: string = 'http://localhost:3000/employee';
 
   constructor(private http: HttpClient) { }
 
@@ -20,15 +20,15 @@ export class EmployeeService {
   }
   // http://localhost:3000/employee?id=ukfWOoqCgJWt2zHc
 
-  getIdByEmployee(id: string): Observable<EmployeeModel[]> {
+  getIdByEmployee(id: string | undefined): Observable<EmployeeModel[]> {
     return this.http.get<EmployeeModel[]>(`${this.baseUrl}?id=${id}`)
   }
 
-  updateEmployee(id: string, data: EmployeeModel): Observable<EmployeeModel> {
+  updateEmployee(id: string | undefined, data: EmployeeModel): Observable<EmployeeModel> {
     return this.http.put<EmployeeModel>(`${this.baseUrl}/${id}`, data)
   }
 
-  deleteEmployee(id: string) {
+  deleteEmployee(id: string | undefined) {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
