@@ -15,7 +15,7 @@ import { LoginModel } from '../../model/login.model';
 })
 export class Signup {
 
-  protected readonly signupForm: FormGroup;
+  signupForm: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router, private toastr: ToastrService, private authService: Auth, private loginService: LoginService) {
     this.signupForm = this.fb.group({
