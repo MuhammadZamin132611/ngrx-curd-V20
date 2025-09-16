@@ -1,12 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { provideRouter } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { of, throwError } from 'rxjs';
 
 import { Signup } from './signup';
 import { LoginService } from '../../services/login-service';
-import { provideRouter, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Auth } from '../../services/auth';
-import { ReactiveFormsModule } from '@angular/forms';
-import { of, throwError } from 'rxjs';
+import { LoginModel } from '../../model/login.model';
 
 describe('Signup', () => {
   let component: Signup;
@@ -19,8 +21,8 @@ describe('Signup', () => {
   beforeEach(async () => {
     loginServiceSpy = jasmine.createSpyObj('LoginService', ['checkEmailExists', 'createId']);
     routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
-    toastrSpy = jasmine.createSpyObj('ToastrService', ['success', 'error']);
     authSpy = jasmine.createSpyObj('Auth', ['logIn']);
+    toastrSpy = jasmine.createSpyObj('ToastrService', ['success', 'error']);
 
     await TestBed.configureTestingModule({
       imports: [Signup, ReactiveFormsModule],
@@ -42,7 +44,7 @@ describe('Signup', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show error if form InValid', () => {
+  it('should show an error if the form is invalid', () => {
     component.signupForm.setValue({
       name: '',
       email: '',
@@ -51,7 +53,35 @@ describe('Signup', () => {
     });
     component.signupSubmit();
     expect(component.signupForm.invalid).toBeTrue();
-    expect(toastrSpy.error).toHaveBeenCalledWith('Please Enter Email and Passowrd','Create your Account');
+    expect(toastrSpy.error).toHaveBeenCalledWith('Please Enter Email and Passowrd', 'Create your Account');
     expect(routerSpy.navigateByUrl).not.toHaveBeenCalled();
+  });
+
+  it('should successfully create a new user and navigate to the dashboard', (done) => {
+    // Setup: mock valid form data
+    const validFormData = {
+      name: 'John Doe',
+      email: 'john.doe@example.com',
+      password: 'password123',
+      isAdmin: false
+    };
+    component.signupForm.setValue(validFormData);
+
+    // Mock: service calls
+    loginServiceSpy.checkEmailExists.and.returnValue(of(false));
+    loginServiceSpy.createId.and.returnValue(of({}) as any);
+
+    // Act: trigger form submission
+    component.signupSubmit();
+
+    // Assertions
+    fixture.whenStable().then(() => {
+      expect(loginServiceSpy.checkEmailExists).toHaveBeenCalled();
+      expect(loginServiceSpy.createId).toHaveBeenCalled();
+      expect(authSpy.logIn).toHaveBeenCalled();
+      expect(toastrSpy.success).toHaveBeenCalledWith('', 'Successfully Login');
+      expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('/dashboard/home');
+      done();
+    });
   });
 });
