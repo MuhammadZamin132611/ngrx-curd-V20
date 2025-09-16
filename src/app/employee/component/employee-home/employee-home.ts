@@ -5,7 +5,6 @@ import { Router, RouterOutlet } from '@angular/router';
 import { SideMenu } from "../../shared/side-menu/side-menu";
 import { MatDialog } from '@angular/material/dialog';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { NgClass } from '@angular/common';
 import { SidebarService } from '../../services/sidebar-service';
 
 @Component({
@@ -23,8 +22,6 @@ export class EmployeeHome {
 
    constructor(
     private breakpointObserver: BreakpointObserver,
-    private router: Router,
-    private dialog: MatDialog,
     private drawerService: SidebarService
   ) { }
 
