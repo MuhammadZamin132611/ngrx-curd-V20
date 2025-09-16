@@ -14,7 +14,7 @@ import { LoginModel } from '../../model/login.model';
   styleUrl: './login.scss'
 })
 export class Login {
-  protected readonly loginForm: FormGroup;
+  loginForm: FormGroup;
 
   constructor(private fb: FormBuilder, private router: Router, private toastr: ToastrService, private authService: Auth, private loginService: LoginService) {
     this.loginForm = this.fb.group({
