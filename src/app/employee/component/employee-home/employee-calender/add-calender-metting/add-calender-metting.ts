@@ -65,10 +65,6 @@ export class AddCalenderMetting {
     return id;
   }
 
-  addMeetInCalender() {
-
-  }
-
   roundToNearest30(date: Date): Date {
     const minutes = date.getMinutes();
     const roundedMinutes = minutes < 30 ? 0 : 30;
