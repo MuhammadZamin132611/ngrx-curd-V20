@@ -15,7 +15,7 @@ import { addEmployee } from '../../../../../store/employees/employees.actions';
   styleUrl: './add-employee.scss'
 })
 export class AddEmployee {
-  protected readonly employeeForm: FormGroup;
+  employeeForm: FormGroup;
   employees: Employee[] = [
     { value: 'part-time', viewValue: 'Part Time' },
     { value: 'full-time', viewValue: 'Full Time' },
