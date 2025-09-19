@@ -20,7 +20,7 @@ describe('ProfileTest', () => {
     id: '123',
     name: 'Alice',
     email: 'alice@example.com',
-    password: 'secret123',
+    password: 'testpass',
     isAdmin: true
   };
 
@@ -67,7 +67,7 @@ describe('ProfileTest', () => {
     component.ngOnInit();
     expect(component.profileForm.get('name')?.value).toBe('Alice');
     expect(component.profileForm.get('email')?.value).toBe('alice@example.com');
-    expect(component.profileForm.get('password')?.value).toBe('secret123');
+    expect(component.profileForm.get('password')?.value).toBe('testpass');
   });
 
   it('should toggle showHidePassword when show password is called', () => {
@@ -94,7 +94,7 @@ describe('ProfileTest', () => {
     component.profileForm.setValue({
       name: 'Alice',
       email: 'alice@example.com',
-      password: 'secret123',
+      password: 'testpass',
       isAdmin: true
     });
     component.userId = '123';
@@ -105,7 +105,7 @@ describe('ProfileTest', () => {
         changes: {
           name: 'Alice',
           email: 'alice@example.com',
-          password: 'secret123',
+          password: 'testpass',
           isAdmin: true
         }
       })
