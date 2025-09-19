@@ -1,15 +1,14 @@
-import { AfterViewInit, Component, ElementRef, QueryList, Renderer2, ViewChildren } from '@angular/core';
+import { Component, ElementRef, QueryList, Renderer2, ViewChildren } from '@angular/core';
 import { MaterialModule } from '../../../../../Material.module';
-import { Router, RouterLink } from '@angular/router';
-import { NgClass } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [MaterialModule, RouterLink, NgClass],
+  imports: [MaterialModule, RouterLink],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'
 })
-export class Dashboard implements AfterViewInit {
+export class Dashboard {
 
 
   @ViewChildren('tlItem') tlItems!: QueryList<ElementRef>;
@@ -31,17 +30,17 @@ export class Dashboard implements AfterViewInit {
     }
   ];
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2) { }
 
-  ngAfterViewInit(): void {
-    this.tlItems.forEach((el, i) => {
-      setTimeout(() => {
-        this.renderer.removeClass(el.nativeElement, 'opacity-0');
-        this.renderer.removeClass(el.nativeElement, 'translate-y-5');
-        this.renderer.addClass(el.nativeElement, 'opacity-100');
-        this.renderer.addClass(el.nativeElement, 'translate-y-0');
-      }, i * 200); // stagger: 200ms delay per item
-    });
-  }
+  // ngAfterViewInit(): void {
+  //   this.tlItems.forEach((el, i) => {
+  //     setTimeout(() => {
+  //       this.renderer.removeClass(el.nativeElement, 'opacity-0');
+  //       this.renderer.removeClass(el.nativeElement, 'translate-y-5');
+  //       this.renderer.addClass(el.nativeElement, 'opacity-100');
+  //       this.renderer.addClass(el.nativeElement, 'translate-y-0');
+  //     }, i * 200); // stagger: 200ms delay per item
+  //   });
+  // }
 
 }
