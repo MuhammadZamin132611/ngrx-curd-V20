@@ -5,6 +5,7 @@ import * as EmployeesActions from './employees.actions';
 import { catchError, filter, map, mergeMap, of, withLatestFrom } from "rxjs";
 import { Store } from "@ngrx/store";
 import { selectEmployeesLoaded } from "./employees.selectors";
+import { EmployeeModel } from "../../employee/model/employeemodel";
 
 @Injectable()
 export class EmployeesEffects {
@@ -43,12 +44,13 @@ export class EmployeesEffects {
     updateEmployee$ = createEffect(() =>
         this.actions$.pipe(
             ofType(EmployeesActions.updateEmployee),
-            mergeMap(({ id, changes }) =>
-                this.empService.updateEmployee(id, changes).pipe(
+            mergeMap(({ id, changes }) => {
+                const fullEmployee: EmployeeModel = { id, ...changes } as EmployeeModel;
+                return this.empService.updateEmployee(id, fullEmployee).pipe(
                     map((employees) => EmployeesActions.updateEmployeeSuccess({ employees })),
                     catchError((error) => of(EmployeesActions.updateEmployeeFailure({ error })))
-                )
-            )
+                );
+            })
         )
     );
 
