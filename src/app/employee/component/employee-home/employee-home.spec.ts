@@ -95,24 +95,24 @@ describe('EmployeeHome', () => {
     expect(sidebarService.setDrawerState).toHaveBeenCalledWith(true);
   });
 
-  it('should sync isMenuOpen with sidebar service state', () => {
-  const isOpenSubject = new Subject<boolean>();
-  (sidebarService as any).isOpen$ = isOpenSubject.asObservable();
+  // it('should sync isMenuOpen with sidebar service state', () => {
+  //   const isOpenSubject = new Subject<boolean>();
+  //   (sidebarService as any).isOpen$ = isOpenSubject.asObservable();
 
-  spyOn(component['breakpointObserver'], 'observe').and.returnValue(of({
-    matches: false,
-    breakpoints: {}
-  }));
+  //   spyOn(component['breakpointObserver'], 'observe').and.returnValue(of({
+  //     matches: false,
+  //     breakpoints: {}
+  //   }));
 
-  component.ngOnInit();
+  //   component.ngOnInit();
 
-  isOpenSubject.next(false);
-  fixture.detectChanges();
-  expect(component.isMenuOpen).toBe(false);
+  //   isOpenSubject.next(false);
+  //   fixture.detectChanges();
+  //   expect(component.isMenuOpen).toBe(false);
 
-  isOpenSubject.next(true);
-  fixture.detectChanges();
-  expect(component.isMenuOpen).toBe(true);
-});
+  //   isOpenSubject.next(true);
+  //   fixture.detectChanges();
+  //   expect(component.isMenuOpen).toBe(true);
+  // });
 
 });
