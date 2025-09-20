@@ -1,10 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { App } from './app';
+import { StorageService } from './employee/services/storage-service';
 
 describe('App', () => {
+  let storageServiceSpy: jasmine.SpyObj<StorageService>;
+
   beforeEach(async () => {
+    storageServiceSpy = jasmine.createSpyObj('StorageService', ['getItem']);
+
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [{ provide: StorageService, useValue: storageServiceSpy }]
     }).compileComponents();
   });
 
@@ -14,10 +20,14 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
+  it('should call storage.getItem oninit (constructor)', () => {
+    TestBed.createComponent(App);
+    expect(storageServiceSpy.getItem).toHaveBeenCalled();
+  });
+
   it('should render title', () => {
     const fixture = TestBed.createComponent(App);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, ngrx-curd');
+    const app = fixture.componentInstance;
+    expect(app.title).toContain('Hello, ngrx-curd');
   });
 });
