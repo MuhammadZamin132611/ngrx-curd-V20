@@ -9,8 +9,7 @@ import { StorageService } from './employee/services/storage-service';
   styleUrl: './app.scss'
 })
 export class App {
-  title = 'Hello, ngrx-curd';
-  
+
   constructor(private storage: StorageService) {
     this.storage.getItem(); // Automatically clears if older than 30 days
   }

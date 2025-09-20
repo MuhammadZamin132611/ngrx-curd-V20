@@ -25,9 +25,4 @@ describe('App', () => {
     expect(storageServiceSpy.getItem).toHaveBeenCalled();
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-    expect(app.title).toContain('Hello, ngrx-curd');
-  });
 });
