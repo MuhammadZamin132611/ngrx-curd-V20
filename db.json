@@ -11,7 +11,7 @@
       "name": "Zamin",
       "email": "zamin@gmail.com",
       "password": "zamin@123",
-      "isAdmin": false,
+      "isAdmin": true,
       "id": "IsOuSCCNPVxXrM20"
     }
   ],

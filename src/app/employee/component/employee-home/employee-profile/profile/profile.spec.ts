@@ -57,7 +57,7 @@ describe('ProfileTest', () => {
   });
 
   it('should initialize form as invalid', () => {
-    expect(component.profileForm.valid).toBeTrue();
+    expect(component.profileForm.valid).toBeFalse();
   });
 
 

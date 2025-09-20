@@ -20,7 +20,7 @@ export class Profile implements OnInit {
   user$: any;
   userId!: string;
 
-  constructor(private fb: FormBuilder, private store: Store, private router:Router) {
+  constructor(private fb: FormBuilder, private store: Store, private router: Router) {
     this.user$ = this.store.select(selectSelectedUser);
     this.profileForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
@@ -54,6 +54,14 @@ export class Profile implements OnInit {
     if (this.profileForm.valid) {
       const updatedData = this.profileForm.getRawValue();
       this.store.dispatch(ProfileActions.updateProfile({ id: this.userId, changes: updatedData }))
+
+      const existingLogin = localStorage.getItem('login');
+      if (existingLogin) {
+        const parsed = JSON.parse(existingLogin);
+        const updatedLogin = { ...parsed, ...updatedData }; // merge old + new
+        localStorage.setItem('login', JSON.stringify(updatedLogin));
+      }
+
       this.router.navigateByUrl('/dashboard')
     }
     else {
